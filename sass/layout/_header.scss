@@ -1,16 +1,39 @@
 .header {
-    // padding: 4rem 20rem;
+    width: 100%;
+    background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670971/FrontendMentor/CrowdFunding%20Page/image-hero-desktop_kczrwq.jpg");
+    background-color: $color-neutral-white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 55vh;
+    padding: 4rem 20rem;
 
-    // @include respond(big-desktop) {
-    //     padding: 5rem 23rem;
-    // }
-    // @include respond(tab-land) {
-    //     padding: 4rem 18rem;
-    // }
-    // @include respond(tab-port) {
-    //     padding: 4rem 13rem;
-    // }
-    // @include respond(phone) {
-    //     padding: 3rem 5rem;
-    // }
+    @include respond(phone) {
+        background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670970/FrontendMentor/CrowdFunding%20Page/image-hero-mobile_hlaa2l.jpg");
+        padding: 3rem 2rem;
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    &__links {
+        display: flex;
+        list-style: none;
+        z-index: 99;
+    }
+    &__item {
+        margin-left: 3rem;
+    }
+    &__link:link,
+    &__link:visited {
+        display: block;
+        transition: all 0.2s;
+        text-decoration: none;
+        color: $color-neutral-white;
+        font-size: $-font-size-nav;
+    }
 }
