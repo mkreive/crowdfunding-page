@@ -22,23 +22,24 @@ ORDER: Base + typography > general layout + grid > page layout > components
   padding: 0;
   box-sizing: inherit; }
 
+html,
+body {
+  height: 100%; }
+
 html {
   font-size: 62.5%; }
+  @media only screen and (min-width: 112.5em) {
+    html {
+      font-size: 75%; } }
   @media only screen and (max-width: 75em) {
     html {
       font-size: 56.25%; } }
   @media only screen and (max-width: 56.25em) {
     html {
       font-size: 50%; } }
-  @media only screen and (min-width: 112.5em) {
-    html {
-      font-size: 75%; } }
 
 body {
   box-sizing: border-box; }
-  @media only screen and (max-width: 56.25em) {
-    body {
-      padding: 0; } }
 
 img,
 picture,
@@ -66,6 +67,11 @@ h6 {
 #root,
 #__next {
   isolation: isolate; }
+
+.container {
+  display: grid;
+  align-items: center;
+  width: 100vw; }
 
 body {
   font-family: "Commissioner", sans-serif;
