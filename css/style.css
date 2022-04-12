@@ -144,7 +144,15 @@ body {
       padding: 3rem; } }
   .card-project {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    align-items: center; }
+  .card__sections {
+    display: flex; }
+    .card__sections-section {
+      width: 33.3%; }
+    .card__sections:not(:first-child) {
+      border-left: 1px solid red;
+      background-color: red; }
 
 .btn {
   background-color: #3cb4ac;
@@ -152,8 +160,11 @@ body {
   font-size: 1.8rem;
   color: white;
   font-weight: 700;
-  padding: 1.4rem 4.5rem;
-  border-radius: 5rem; }
+  padding: 1.7rem 4.5rem;
+  border-radius: 5rem;
+  cursor: pointer; }
+  .btn:hover, .btn:active {
+    background-color: #147b74; }
 
 .progress-bar[value] {
   -webkit-appearance: none;
@@ -254,17 +265,16 @@ body {
           top: 0.9rem; } }
 
 .project {
-  width: 53vw;
+  width: 50vw;
   margin-top: -12rem; }
   .project-logo {
     position: relative;
     width: 7.5rem;
-    top: -6rem;
-    left: 50%;
-    transform: translate(-50%, -50%); }
+    top: -10rem;
+    margin-bottom: -7rem; }
 
-.info {
-  width: 53vw; }
+.stats {
+  width: 50vw; }
 
 .about {
-  width: 53vw; }
+  width: 50vw; }

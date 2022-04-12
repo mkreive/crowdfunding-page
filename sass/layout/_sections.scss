@@ -1,18 +1,17 @@
 .project {
-    width: 53vw;
+    width: 50vw;
     margin-top: -12rem;
 
     &-logo {
         position: relative;
         width: 7.5rem;
-        top: -6rem;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: -10rem;
+        margin-bottom: -7rem;
     }
 }
-.info {
-    width: 53vw;
+.stats {
+    width: 50vw;
 }
 .about {
-    width: 53vw;
+    width: 50vw;
 }
