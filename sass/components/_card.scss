@@ -1,0 +1,13 @@
+.card {
+    width: 50vw;
+    border: 1px solid darken($color-neutral-light-gray, $amount: 4);
+    background-color: $color-neutral-white;
+    border-radius: 1rem;
+    padding: 6rem;
+    margin-bottom: 3rem;
+
+    @include respond(phone) {
+        width: 90vw;
+        padding: 3rem;
+    }
+}

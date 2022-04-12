@@ -37,6 +37,9 @@ html {
   @media only screen and (max-width: 56.25em) {
     html {
       font-size: 50%; } }
+  @media only screen and (max-width: 37.5em) {
+    html {
+      font-size: 40%; } }
 
 body {
   box-sizing: border-box; }
@@ -70,8 +73,9 @@ h6 {
 
 .container {
   display: grid;
-  align-items: center;
-  width: 100vw; }
+  place-items: center;
+  width: 100vw;
+  background-color: #fafafa; }
 
 body {
   font-family: "Commissioner", sans-serif;
@@ -102,6 +106,23 @@ body {
 .u-margin-top-huge {
   margin-top: 10rem !important; }
 
+.header-big {
+  font-size: 3.5rem;
+  color: black;
+  font-weight: 700; }
+
+.card {
+  width: 50vw;
+  border: 1px solid #f0f0f0;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 6rem;
+  margin-bottom: 3rem; }
+  @media only screen and (max-width: 37.5em) {
+    .card {
+      width: 90vw;
+      padding: 3rem; } }
+
 .header {
   width: 100%;
   background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670971/FrontendMentor/CrowdFunding%20Page/image-hero-desktop_kczrwq.jpg");
@@ -120,7 +141,7 @@ body {
   @media only screen and (max-width: 37.5em) {
     .header {
       background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670970/FrontendMentor/CrowdFunding%20Page/image-hero-mobile_hlaa2l.jpg");
-      padding: 3rem 2rem; } }
+      padding: 5.5rem 3rem; } }
 
 .nav {
   display: flex;
@@ -151,7 +172,7 @@ body {
         display: block;
         visibility: visible;
         position: fixed;
-        top: 3rem;
+        top: 6rem;
         right: 1.5rem;
         z-index: 2000;
         text-align: center;

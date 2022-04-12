@@ -18,12 +18,13 @@ html {
         font-size: 75%; //1rem = 12, 12/16
     }
     @include respond(tab-land) {
-        // width < 1200?
         font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
     }
     @include respond(tab-port) {
-        // width < 900?
         font-size: 50%; //1 rem = 8px, 8/16 = 50%
+    }
+    @include respond(phone) {
+        font-size: 40%;
     }
 }
 
@@ -64,6 +65,7 @@ h6 {
 
 .container {
     display: grid;
-    align-items: center;
+    place-items: center;
     width: 100vw;
+    background-color: $color-neutral-light-gray;
 }

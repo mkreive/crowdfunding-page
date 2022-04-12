@@ -16,7 +16,7 @@
     }
     @include respond(phone) {
         background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670970/FrontendMentor/CrowdFunding%20Page/image-hero-mobile_hlaa2l.jpg");
-        padding: 3rem 2rem;
+        padding: 5.5rem 3rem;
     }
 }
 
@@ -45,7 +45,7 @@
         transition: all 0.2s;
         text-decoration: none;
         color: $color-neutral-white;
-        font-size: $-font-size-nav;
+        font-size: $font-size-nav;
     }
 
     &__button {
@@ -56,7 +56,7 @@
             display: block;
             visibility: visible;
             position: fixed;
-            top: 3rem;
+            top: 6rem;
             right: 1.5rem;
             z-index: 2000;
             text-align: center;
