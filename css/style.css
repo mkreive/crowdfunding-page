@@ -111,8 +111,28 @@ body {
   color: black;
   font-weight: 700; }
 
+.header-medium {
+  font-size: 2.3rem;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 3rem; }
+  @media only screen and (max-width: 37.5em) {
+    .header-medium {
+      margin-bottom: 1.5rem; } }
+
+.bidding {
+  color: #3cb4ac;
+  font-size: 1.8rem;
+  font-weight: 500; }
+
+.text {
+  font-size: 1.8rem;
+  color: #7a7a7a;
+  line-height: 3rem;
+  margin-bottom: 3rem; }
+
 .card {
-  width: 50vw;
+  width: 100%;
   border: 1px solid #f0f0f0;
   background-color: white;
   border-radius: 1rem;
@@ -120,8 +140,29 @@ body {
   margin-bottom: 3rem; }
   @media only screen and (max-width: 37.5em) {
     .card {
-      width: 90vw;
+      width: 100%;
       padding: 3rem; } }
+
+.btn {
+  background-color: #3cb4ac;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 700;
+  padding: 1.4rem 4.5rem;
+  border-radius: 5rem; }
+
+.progress-bar[value] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 15px; }
+  .progress-bar[value]::-webkit-progress-bar {
+    background-color: #fafafa;
+    border-radius: 1rem; }
+  .progress-bar[value]::-webkit-progress-value {
+    background-color: #3cb4ac;
+    border-radius: 1rem; }
 
 .header {
   width: 100%;
@@ -203,3 +244,12 @@ body {
           top: -0.9rem; }
         .nav__icon:hover::after {
           top: 0.9rem; } }
+
+.project {
+  width: 53vw; }
+
+.info {
+  width: 53vw; }
+
+.about {
+  width: 53vw; }

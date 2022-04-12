@@ -1,5 +1,5 @@
 .card {
-    width: 50vw;
+    width: 100%;
     border: 1px solid darken($color-neutral-light-gray, $amount: 4);
     background-color: $color-neutral-white;
     border-radius: 1rem;
@@ -7,7 +7,7 @@
     margin-bottom: 3rem;
 
     @include respond(phone) {
-        width: 90vw;
+        width: 100%;
         padding: 3rem;
     }
 }

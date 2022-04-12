@@ -3,3 +3,20 @@
     color: $color-neutral-black;
     font-weight: $font-weight-heavy;
 }
+
+.header-medium {
+    font-size: $font-size-header-medium;
+    color: $color-neutral-black;
+    font-weight: $font-weight-heavy;
+    margin-bottom: 3rem;
+
+    @include respond(phone) {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.bidding {
+    color: $color-primary-moderate-cyan;
+    font-size: $font-size-nav;
+    font-weight: $font-weight-medium;
+}
