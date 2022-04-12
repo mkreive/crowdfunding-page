@@ -1,32 +1,51 @@
 .card {
     width: 100%;
-    border: 1px solid darken($color-neutral-light-gray, $amount: 4);
+    border: 1px solid $color-neutral-light-gray-darkened;
     background-color: $color-neutral-white;
     border-radius: 1rem;
     padding: 6rem;
     margin-bottom: 3rem;
 
+    @include respond(tab-port) {
+        padding: 7rem 5rem;
+    }
     @include respond(phone) {
-        width: 100%;
-        padding: 3rem;
+        padding: 5rem 3rem;
     }
 
     &-project {
         display: flex;
         flex-direction: column;
         align-items: center;
+        @include respond(phone) {
+            text-align: center;
+        }
     }
 
     &__sections {
         display: flex;
+        margin-bottom: 5rem;
 
         &-section {
             width: 33.3%;
+
+            &:not(:first-child) {
+                border-left: 2px solid $color-neutral-light-gray-darkened;
+                padding-left: 5rem;
+
+                @include respond(phone) {
+                    border-top: 2px solid $color-neutral-light-gray-darkened;
+                    border-left: none;
+                    padding-left: 0;
+                    padding-top: 4rem;
+                    text-align: center;
+                }
+            }
         }
 
-        &:not(:first-child) {
-            border-left: 1px solid red;
-            background-color: red;
+        @include respond(phone) {
+            flex-direction: column;
+            align-items: center;
         }
     }
 }

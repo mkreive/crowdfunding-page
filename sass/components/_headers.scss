@@ -2,6 +2,10 @@
     font-size: $font-size-header-big;
     color: $color-neutral-black;
     font-weight: $font-weight-heavy;
+    @include respond(phone) {
+        line-height: 4rem;
+        margin-bottom: 3rem;
+    }
 }
 
 .header-medium {
@@ -11,7 +15,7 @@
     margin-bottom: 3rem;
 
     @include respond(phone) {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 }
 
@@ -19,4 +23,8 @@
     color: $color-primary-moderate-cyan;
     font-size: $font-size-nav;
     font-weight: $font-weight-medium;
+    margin-bottom: 3rem;
+    @include respond(phone) {
+        margin-bottom: 2rem;
+    }
 }

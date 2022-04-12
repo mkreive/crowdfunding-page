@@ -5,13 +5,40 @@
     &-logo {
         position: relative;
         width: 7.5rem;
-        top: -10rem;
+        top: -9.5rem;
         margin-bottom: -7rem;
+
+        @include respond(tab-port) {
+            top: -9rem;
+            margin-bottom: -5rem;
+        }
+        @include respond(phone) {
+            top: -7rem;
+            margin-bottom: -4rem;
+        }
+    }
+
+    @include respond(tab-land) {
+        width: 60vw;
+    }
+    @include respond(tab-port) {
+        width: 70vw;
+    }
+    @include respond(phone) {
+        width: 90vw;
     }
 }
-.stats {
-    width: 50vw;
-}
+.stats,
 .about {
     width: 50vw;
+
+    @include respond(tab-land) {
+        width: 60vw;
+    }
+    @include respond(tab-port) {
+        width: 70vw;
+    }
+    @include respond(phone) {
+        width: 90vw;
+    }
 }

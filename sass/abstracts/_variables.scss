@@ -5,6 +5,10 @@ $color-primary-dark-cyan: hsl(176, 72%, 28%);
 $color-neutral-black: hsl(0, 0%, 0%);
 $color-neutral-dark-gray: hsl(0, 0%, 48%);
 $color-neutral-light-gray: hsl(0, 0%, 98%);
+$color-neutral-light-gray-darkened: darken(
+    $color-neutral-light-gray,
+    $amount: 4
+);
 $color-neutral-white: white;
 
 // FONT
