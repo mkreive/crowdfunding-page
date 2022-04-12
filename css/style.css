@@ -142,6 +142,9 @@ body {
     .card {
       width: 100%;
       padding: 3rem; } }
+  .card-project {
+    display: flex;
+    flex-direction: column; }
 
 .btn {
   background-color: #3cb4ac;
@@ -163,6 +166,11 @@ body {
   .progress-bar[value]::-webkit-progress-value {
     background-color: #3cb4ac;
     border-radius: 1rem; }
+
+.couples {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
 
 .header {
   width: 100%;
@@ -246,7 +254,14 @@ body {
           top: 0.9rem; } }
 
 .project {
-  width: 53vw; }
+  width: 53vw;
+  margin-top: -12rem; }
+  .project-logo {
+    position: relative;
+    width: 7.5rem;
+    top: -6rem;
+    left: 50%;
+    transform: translate(-50%, -50%); }
 
 .info {
   width: 53vw; }
