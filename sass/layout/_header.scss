@@ -8,6 +8,12 @@
     height: 55vh;
     padding: 4rem 20rem;
 
+    @include respond(tab-land) {
+        padding: 3rem 15rem;
+    }
+    @include respond(tab-port) {
+        padding: 3rem 10rem;
+    }
     @include respond(phone) {
         background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670970/FrontendMentor/CrowdFunding%20Page/image-hero-mobile_hlaa2l.jpg");
         padding: 3rem 2rem;
@@ -24,6 +30,11 @@
         display: flex;
         list-style: none;
         z-index: 99;
+
+        @include respond(phone) {
+            visibility: hidden;
+            display: none;
+        }
     }
     &__item {
         margin-left: 3rem;
@@ -35,5 +46,64 @@
         text-decoration: none;
         color: $color-neutral-white;
         font-size: $-font-size-nav;
+    }
+
+    &__button {
+        display: none;
+        visibility: hidden;
+
+        @include respond(phone) {
+            display: block;
+            visibility: visible;
+            position: fixed;
+            top: 3rem;
+            right: 1.5rem;
+            z-index: 2000;
+            text-align: center;
+            cursor: pointer;
+            width: 5rem;
+            height: 5rem;
+        }
+    }
+    &__icon {
+        @include respond(phone) {
+            position: relative;
+            margin-top: 1.4rem;
+
+            &,
+            &::before,
+            &::after {
+                width: 2.5rem;
+                height: 3px;
+                background-color: $color-neutral-white;
+                display: inline-block;
+            }
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                transition: all 0.2s;
+            }
+
+            &::before {
+                top: -0.8rem;
+            }
+            &::after {
+                top: 0.8rem;
+            }
+
+            &:hover {
+                transition: all 0.3s;
+
+                &::before {
+                    top: -0.9rem;
+                }
+                &::after {
+                    top: 0.9rem;
+                }
+            }
+        }
     }
 }

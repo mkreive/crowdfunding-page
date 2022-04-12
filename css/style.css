@@ -111,6 +111,12 @@ body {
   background-size: cover;
   height: 55vh;
   padding: 4rem 20rem; }
+  @media only screen and (max-width: 75em) {
+    .header {
+      padding: 3rem 15rem; } }
+  @media only screen and (max-width: 56.25em) {
+    .header {
+      padding: 3rem 10rem; } }
   @media only screen and (max-width: 37.5em) {
     .header {
       background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670970/FrontendMentor/CrowdFunding%20Page/image-hero-mobile_hlaa2l.jpg");
@@ -125,6 +131,10 @@ body {
     display: flex;
     list-style: none;
     z-index: 99; }
+    @media only screen and (max-width: 37.5em) {
+      .nav__links {
+        visibility: hidden;
+        display: none; } }
   .nav__item {
     margin-left: 3rem; }
   .nav__link:link, .nav__link:visited {
@@ -133,3 +143,42 @@ body {
     text-decoration: none;
     color: white;
     font-size: 1.8rem; }
+  .nav__button {
+    display: none;
+    visibility: hidden; }
+    @media only screen and (max-width: 37.5em) {
+      .nav__button {
+        display: block;
+        visibility: visible;
+        position: fixed;
+        top: 3rem;
+        right: 1.5rem;
+        z-index: 2000;
+        text-align: center;
+        cursor: pointer;
+        width: 5rem;
+        height: 5rem; } }
+  @media only screen and (max-width: 37.5em) {
+    .nav__icon {
+      position: relative;
+      margin-top: 1.4rem; }
+      .nav__icon, .nav__icon::before, .nav__icon::after {
+        width: 2.5rem;
+        height: 3px;
+        background-color: white;
+        display: inline-block; }
+      .nav__icon::before, .nav__icon::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        transition: all 0.2s; }
+      .nav__icon::before {
+        top: -0.8rem; }
+      .nav__icon::after {
+        top: 0.8rem; }
+      .nav__icon:hover {
+        transition: all 0.3s; }
+        .nav__icon:hover::before {
+          top: -0.9rem; }
+        .nav__icon:hover::after {
+          top: 0.9rem; } }
