@@ -12,4 +12,11 @@
     &:active {
         background-color: $color-primary-dark-cyan;
     }
+
+    &-bookmark {
+        background-color: $color-neutral-light-gray-darkened;
+        color: $color-neutral-dark-gray;
+        background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-bookmark_q5y1wk.svg");
+        background-repeat: no-repeat;
+    }
 }

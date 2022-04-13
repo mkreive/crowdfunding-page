@@ -190,6 +190,11 @@ body {
   cursor: pointer; }
   .btn:hover, .btn:active {
     background-color: #147b74; }
+  .btn-bookmark {
+    background-color: #f0f0f0;
+    color: #7a7a7a;
+    background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-bookmark_q5y1wk.svg");
+    background-repeat: no-repeat; }
 
 .progress-bar[value] {
   -webkit-appearance: none;
