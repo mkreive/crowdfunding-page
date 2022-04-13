@@ -3,15 +3,16 @@
     display: flex;
     justify-content: space-between;
     line-height: 0;
+    align-items: baseline;
 
     @include respond(phone) {
         flex-direction: column;
         align-items: baseline;
     }
+
     &-left:first-child {
         display: flex;
         align-items: baseline;
-        gap: 7px;
 
         @include respond(phone) {
             align-items: center;
