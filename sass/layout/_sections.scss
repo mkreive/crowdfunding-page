@@ -48,3 +48,7 @@
     display: grid;
     text-align: center;
 }
+.modal-addon {
+    position: relative;
+    z-index: 99;
+}

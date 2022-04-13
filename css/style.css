@@ -139,6 +139,10 @@ body {
         text-align: center; } }
   .card-modal {
     display: flex; }
+  .card-addon {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -5rem; }
   .card-radio {
     display: grid;
     place-content: center;
@@ -216,6 +220,25 @@ body {
     cursor: pointer;
     text-align: right;
     left: 100%; }
+  .btn-input {
+    width: 15rem;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    color: black;
+    font-weight: 700;
+    padding: 2rem 3rem;
+    border-radius: 5rem;
+    cursor: pointer;
+    border: 2px solid #3cb4ac; }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type="number"] {
+  -moz-appearance: textfield; }
 
 .progress-bar[value] {
   -webkit-appearance: none;
@@ -369,6 +392,10 @@ body {
   width: 30vw;
   display: grid;
   text-align: center; }
+
+.modal-addon {
+  position: relative;
+  z-index: 99; }
 
 .overlay {
   position: fixed;

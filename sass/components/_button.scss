@@ -47,4 +47,25 @@
         text-align: right;
         left: 100%;
     }
+
+    &-input {
+        width: 15rem;
+        outline: none;
+        border: none;
+        font-size: $default-font-size;
+        color: $color-neutral-black;
+        font-weight: $font-weight-heavy;
+        padding: 2rem 3rem;
+        border-radius: 5rem;
+        cursor: pointer;
+        border: 2px solid $color-primary-moderate-cyan;
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
 }
