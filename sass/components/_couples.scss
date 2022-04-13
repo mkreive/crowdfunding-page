@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    line-height: 0;
 
     @include respond(phone) {
         flex-direction: column;

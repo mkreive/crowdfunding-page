@@ -4,7 +4,7 @@
     font-size: $font-size-nav;
     color: $color-neutral-white;
     font-weight: $font-weight-heavy;
-    padding: 1.7rem 4.5rem;
+    padding: 3.2rem 4.5rem;
     border-radius: 5rem;
     cursor: pointer;
 
@@ -34,5 +34,18 @@
         &:hover {
             background-color: $color-neutral-dark-gray;
         }
+    }
+
+    &-close {
+        position: relative;
+        display: block;
+        background-image: url(https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-close-modal_t3wc9h.svg);
+        background-repeat: no-repeat;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        text-align: right;
+
+        left: 100%;
     }
 }

@@ -49,6 +49,9 @@
     }
 
     &__button {
+        background-image: url(https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-hamburger_fip2wc.svg);
+        background-repeat: no-repeat;
+
         display: none;
         visibility: hidden;
 
@@ -63,47 +66,6 @@
             cursor: pointer;
             width: 5rem;
             height: 5rem;
-        }
-    }
-    &__icon {
-        @include respond(phone) {
-            position: relative;
-            margin-top: 1.4rem;
-
-            &,
-            &::before,
-            &::after {
-                width: 2.5rem;
-                height: 3px;
-                background-color: $color-neutral-white;
-                display: inline-block;
-            }
-
-            &::before,
-            &::after {
-                content: "";
-                position: absolute;
-                left: 0;
-                transition: all 0.2s;
-            }
-
-            &::before {
-                top: -0.8rem;
-            }
-            &::after {
-                top: 0.8rem;
-            }
-
-            &:hover {
-                transition: all 0.3s;
-
-                &::before {
-                    top: -0.9rem;
-                }
-                &::after {
-                    top: 0.9rem;
-                }
-            }
         }
     }
 }

@@ -135,6 +135,13 @@ body {
     @media only screen and (max-width: 37.5em) {
       .card-project {
         text-align: center; } }
+  .card-modal {
+    display: flex; }
+  .card-checkpoint {
+    background-image: url(https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-hamburger_fip2wc.svg);
+    background-repeat: no-repeat;
+    width: 5rem;
+    height: 5rem; }
   .card__sections {
     display: flex;
     margin-bottom: 5rem; }
@@ -161,7 +168,7 @@ body {
   font-size: 1.8rem;
   color: white;
   font-weight: 700;
-  padding: 1.7rem 4.5rem;
+  padding: 3.2rem 4.5rem;
   border-radius: 5rem;
   cursor: pointer; }
   .btn:hover, .btn:active {
@@ -181,6 +188,16 @@ body {
     cursor: not-allowed; }
     .btn-inactive:hover {
       background-color: #7a7a7a; }
+  .btn-close {
+    position: relative;
+    display: block;
+    background-image: url(https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-close-modal_t3wc9h.svg);
+    background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    text-align: right;
+    left: 100%; }
 
 .progress-bar[value] {
   -webkit-appearance: none;
@@ -197,7 +214,8 @@ body {
 .couples {
   width: 100%;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  line-height: 0; }
   @media only screen and (max-width: 37.5em) {
     .couples {
       flex-direction: column;
@@ -266,6 +284,8 @@ body {
     color: white;
     font-size: 1.8rem; }
   .nav__button {
+    background-image: url(https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-hamburger_fip2wc.svg);
+    background-repeat: no-repeat;
     display: none;
     visibility: hidden; }
     @media only screen and (max-width: 37.5em) {
@@ -280,30 +300,6 @@ body {
         cursor: pointer;
         width: 5rem;
         height: 5rem; } }
-  @media only screen and (max-width: 37.5em) {
-    .nav__icon {
-      position: relative;
-      margin-top: 1.4rem; }
-      .nav__icon, .nav__icon::before, .nav__icon::after {
-        width: 2.5rem;
-        height: 3px;
-        background-color: white;
-        display: inline-block; }
-      .nav__icon::before, .nav__icon::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        transition: all 0.2s; }
-      .nav__icon::before {
-        top: -0.8rem; }
-      .nav__icon::after {
-        top: 0.8rem; }
-      .nav__icon:hover {
-        transition: all 0.3s; }
-        .nav__icon:hover::before {
-          top: -0.9rem; }
-        .nav__icon:hover::after {
-          top: 0.9rem; } }
 
 .project {
   width: 50vw;
@@ -332,22 +328,26 @@ body {
       width: 90vw; } }
 
 .stats,
-.about {
+.about,
+.modal-default {
   width: 50vw; }
   @media only screen and (max-width: 75em) {
     .stats,
-    .about {
+    .about,
+    .modal-default {
       width: 60vw; } }
   @media only screen and (max-width: 56.25em) {
     .stats,
-    .about {
+    .about,
+    .modal-default {
       width: 70vw; } }
   @media only screen and (max-width: 37.5em) {
     .stats,
-    .about {
+    .about,
+    .modal-default {
       width: 90vw; } }
 
-.modal {
+.modal-success {
   width: 30vw;
   display: grid;
   text-align: center; }

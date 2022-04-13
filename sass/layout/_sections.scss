@@ -29,7 +29,8 @@
     }
 }
 .stats,
-.about {
+.about,
+.modal-default {
     width: 50vw;
 
     @include respond(tab-land) {
@@ -42,7 +43,7 @@
         width: 90vw;
     }
 }
-.modal {
+.modal-success {
     width: 30vw;
     display: grid;
     text-align: center;
