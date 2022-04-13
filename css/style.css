@@ -82,30 +82,6 @@ body {
   font-weight: 400;
   line-height: 1.7; }
 
-.u-center-text {
-  text-align: center !important; }
-
-.u-margin-bottom-small {
-  margin-bottom: 1.5rem !important; }
-
-.u-margin-bottom-medium {
-  margin-bottom: 4rem !important; }
-  @media only screen and (max-width: 56.25em) {
-    .u-margin-bottom-medium {
-      margin-bottom: 3rem !important; } }
-
-.u-margin-bottom-big {
-  margin-bottom: 8rem !important; }
-  @media only screen and (max-width: 56.25em) {
-    .u-margin-bottom-big {
-      margin-bottom: 5rem !important; } }
-
-.u-margin-top-big {
-  margin-top: 8rem !important; }
-
-.u-margin-top-huge {
-  margin-top: 10rem !important; }
-
 .header-big {
   font-size: 3.5rem;
   color: black;
@@ -194,7 +170,17 @@ body {
     background-color: #f0f0f0;
     color: #7a7a7a;
     background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-bookmark_q5y1wk.svg");
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    background-position: 0% 50%;
+    background-size: 29%;
+    padding-left: 8rem; }
+    .btn-bookmark:hover {
+      background-color: #f0f0f0; }
+  .btn-inactive {
+    background-color: #7a7a7a;
+    cursor: not-allowed; }
+    .btn-inactive:hover {
+      background-color: #7a7a7a; }
 
 .progress-bar[value] {
   -webkit-appearance: none;
@@ -223,6 +209,20 @@ body {
     @media only screen and (max-width: 37.5em) {
       .couples-left:first-child {
         align-items: center; } }
+
+.inactive {
+  opacity: 45%; }
+
+.hidden {
+  display: none;
+  visibility: hidden;
+  opacity: 0; }
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding-bottom: 3rem; }
 
 .header {
   width: 100%;
@@ -346,3 +346,19 @@ body {
     .stats,
     .about {
       width: 90vw; } }
+
+.modal {
+  width: 30vw;
+  display: grid;
+  text-align: center; }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s; }

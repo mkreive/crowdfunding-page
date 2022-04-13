@@ -25,6 +25,7 @@
     </head>
     <body>
         <div class="container">
+            <div class="overlay hidden"></div>
             <header class="header">
                 <nav class="nav">
                     <img
@@ -177,7 +178,9 @@
                                     <span class="header-big">0</span
                                     ><span class="text">left</span>
                                 </div>
-                                <button class="btn">Out of Stock</button>
+                                <button class="btn btn-inactive">
+                                    Out of Stock
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -219,11 +222,20 @@
             <!-- Selection modal end -->
 
             <!-- Success modal start -->
-
-            Thanks for your support! Your pledge brings us one step closer to
-            sharing Mastercraft Bamboo Monitor Riser worldwide. You will get an
-            email once our campaign is completed. Got it!
-
+            <div class="modal modal-success card hidden">
+                <img
+                    src="https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-check_tofrnr.svg"
+                    alt="checkmark icon"
+                    class="icon"
+                />
+                <h3 class="header-medium">Thanks for your support!</h3>
+                <p class="text">
+                    Your pledge brings us one step closer to sharing Mastercraft
+                    Bamboo Monitor Riser worldwide. You will get an email once
+                    our campaign is completed.
+                </p>
+                <button class="btn">Got it!</button>
+            </div>
             <!-- Success modal end -->
         </div>
     </body>
