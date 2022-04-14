@@ -283,10 +283,12 @@ input[type="number"] {
 .hidden {
   display: none;
   visibility: hidden;
-  opacity: 0; }
+  opacity: 0;
+  transition: all 7ms ease-out; }
 
 .active {
-  border: 2px solid #3cb4ac; }
+  border: 1px solid #3cb4ac;
+  transition: all 7ms ease-out; }
 
 .icon {
   display: flex;

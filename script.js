@@ -31,6 +31,10 @@ const backBtn = document.getElementById("backBtn");
 const modalPledge = document.querySelector(".modal-default");
 const overlay = document.querySelector(".overlay");
 const closeBtn = document.querySelector(".btn-close");
+const pledgeElement = document.querySelectorAll(".card-modal");
+const radioElement = document.querySelectorAll(".card-radio");
+const pledgeAddonElement = document.querySelector(".modal-addon");
+const navLinks = document.querySelectorAll(".nav__link");
 
 // FUNCTIONS
 let openedModal;
@@ -44,6 +48,14 @@ const closeModal = function (modal) {
     overlay.classList.add("hidden");
 };
 
+let pledgeActive;
+const selectPledge = function (pledge) {
+    pledgeActive = pledge;
+    pledge.classList.add("active");
+    pledgeAddonElement.classList.remove("hidden");
+    pledge.appendChild(pledgeAddonElement);
+};
+
 // EVENT HANDLERS
 backBtn.addEventListener("click", function () {
     openModal(modalPledge);
@@ -52,3 +64,16 @@ backBtn.addEventListener("click", function () {
 closeBtn.addEventListener("click", function () {
     closeModal(modalPledge);
 });
+pledgeElement.forEach((pledge) => {
+    pledge.addEventListener("click", function (e) {
+        let pledge = e.currentTarget;
+        console.log(pledge);
+        selectPledge(pledge);
+    });
+});
+
+// navLinks.forEach((link) => {
+//     link.addEventListener("click", function (e) {
+//         console.log(e.target);
+//     });
+// });

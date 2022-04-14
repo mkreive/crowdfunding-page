@@ -38,13 +38,15 @@
 
                     <ul class="nav__links">
                         <li class="nav__item">
-                            <a class="nav__link" href="#">About</a>
+                            <a class="nav__link" href="#section-1">About</a>
                         </li>
                         <li class="nav__item">
-                            <a class="nav__link" href="">Discover</a>
+                            <a class="nav__link" href="#section-2">Discover</a>
                         </li>
                         <li class="nav__item">
-                            <a class="nav__link" href="#">Get Started</a>
+                            <a class="nav__link" href="#section-3"
+                                >Get Started</a
+                            >
                         </li>
                     </ul>
 
@@ -106,7 +108,7 @@
                 </section>
 
                 <!-- ABOUT PROJECT -->
-                <section class="about">
+                <section class="about" id="#section-1">
                     <div class="card">
                         <h3 class="header-medium">About this project</h3>
                         <p class="text">
@@ -124,7 +126,7 @@
                             under the stand.
                         </p>
 
-                        <div class="card card-pledge">
+                        <div class="card card-pledge" id="#section-2">
                             <div class="couples">
                                 <h3 class="header-medium">Bamboo Stand</h3>
                                 <span class="bidding">Pledge $25 or more</span>
@@ -218,49 +220,26 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-modal">
-                        <div>
-                            <input
-                                type="radio"
-                                name="radio"
-                                class="card-radio"
-                            />
-                        </div>
-                        <div>
-                            <div class="couples">
-                                <div class="couples-left">
-                                    <h3 class="header-medium">Bamboo Stand</h3>
-                                    <span class="bidding"
-                                        >Pledge $25 or more</span
-                                    >
-                                </div>
-                                <div class="couples-left">
-                                    <span class="header-medium">101</span
-                                    ><span class="text">left</span>
-                                </div>
-                            </div>
-                            <p class="text">
-                                You get an ergonomic stand made of natural
-                                bamboo. You've helped us launch our promotional
-                                campaign, and you’ll be added to a special
-                                Backer member list.
-                            </p>
-                        </div>
+                <div class="card card-modal">
+                    <div>
+                        <input type="radio" name="radio" class="card-radio" />
                     </div>
-
-                    <!-- PLEDGE MODAL ADDON -->
-                    <div class="modal-addon card-addon couples hidden">
-                        <span class="text">Enter your pledge</span>
-                        <div class="couples-left">
-                            <input
-                                type="number"
-                                class="btn-input"
-                                placeholder="$"
-                                maxlength="999999"
-                            />
-                            <button class="btn">Continue</button>
+                    <div>
+                        <div class="couples">
+                            <div class="couples-left">
+                                <h3 class="header-medium">Bamboo Stand</h3>
+                                <span class="bidding">Pledge $25 or more</span>
+                            </div>
+                            <div class="couples-left">
+                                <span class="header-medium">101</span
+                                ><span class="text">left</span>
+                            </div>
                         </div>
+                        <p class="text">
+                            You get an ergonomic stand made of natural bamboo.
+                            You've helped us launch our promotional campaign,
+                            and you’ll be added to a special Backer member list.
+                        </p>
                     </div>
                 </div>
 
@@ -288,6 +267,20 @@
                             included.
                         </p>
                     </div>
+                </div>
+            </div>
+
+            <!-- PLEDGE MODAL ADDON -->
+            <div class="modal-addon card-addon couples hidden">
+                <span class="text">Enter your pledge</span>
+                <div class="couples-left">
+                    <input
+                        type="number"
+                        class="btn-input"
+                        placeholder="$"
+                        maxlength="999999"
+                    />
+                    <button class="btn">Continue</button>
                 </div>
             </div>
 
