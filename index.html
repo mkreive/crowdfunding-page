@@ -26,6 +26,8 @@
     <body>
         <div class="container">
             <div class="overlay hidden"></div>
+
+            <!-- HEADER WITH NAVIGATION -->
             <header class="header">
                 <nav class="nav">
                     <img
@@ -39,7 +41,7 @@
                             <a class="nav__link" href="#">About</a>
                         </li>
                         <li class="nav__item">
-                            <a class="nav__link" href="#">Discover</a>
+                            <a class="nav__link" href="">Discover</a>
                         </li>
                         <li class="nav__item">
                             <a class="nav__link" href="#">Get Started</a>
@@ -50,6 +52,7 @@
                 </nav>
             </header>
 
+            <!-- PROJECT HEADER -->
             <div class="content">
                 <section class="project">
                     <div class="card card-project">
@@ -66,12 +69,15 @@
                             neck and eye strain.
                         </p>
                         <div class="couples">
-                            <button class="btn">Back this project</button>
+                            <button class="btn" id="backBtn">
+                                Back this project
+                            </button>
                             <button class="btn btn-bookmark">Bookmark</button>
                         </div>
                     </div>
                 </section>
 
+                <!-- PROJECT INFO -->
                 <section class="stats">
                     <div class="card card-stats">
                         <div class="card__sections">
@@ -99,6 +105,7 @@
                     </div>
                 </section>
 
+                <!-- ABOUT PROJECT -->
                 <section class="about">
                     <div class="card">
                         <h3 class="header-medium">About this project</h3>
@@ -185,6 +192,7 @@
                 </section>
             </div>
 
+            <!-- PLEDGE MODAL -->
             <div class="modal-default card hidden">
                 <span class="btn-close"></span>
                 <h3 class="header-medium">Back this project</h3>
@@ -241,6 +249,7 @@
                         </div>
                     </div>
 
+                    <!-- PLEDGE MODAL ADDON -->
                     <div class="modal-addon card-addon couples hidden">
                         <span class="text">Enter your pledge</span>
                         <div class="couples-left">
@@ -248,6 +257,7 @@
                                 type="number"
                                 class="btn-input"
                                 placeholder="$"
+                                maxlength="999999"
                             />
                             <button class="btn">Continue</button>
                         </div>
@@ -281,7 +291,7 @@
                 </div>
             </div>
 
-            <!-- Success modal start -->
+            <!-- SUCCESS MODAL -->
             <div class="modal-success card hidden">
                 <img
                     src="https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-check_tofrnr.svg"
@@ -296,7 +306,6 @@
                 </p>
                 <button class="btn">Got it!</button>
             </div>
-            <!-- Success modal end -->
         </div>
     </body>
 </html>
