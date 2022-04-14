@@ -29,8 +29,7 @@
     }
 }
 .stats,
-.about,
-.modal-default {
+.about {
     width: 50vw;
 
     @include respond(tab-land) {
@@ -48,7 +47,21 @@
     display: grid;
     text-align: center;
 }
-.modal-addon {
-    position: relative;
-    z-index: 99;
+
+.modal-default {
+    z-index: 999;
+    width: 50vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    @include respond(tab-land) {
+        width: 60vw;
+    }
+    @include respond(tab-port) {
+        width: 70vw;
+    }
+    @include respond(phone) {
+        width: 90vw;
+    }
 }
