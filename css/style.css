@@ -201,15 +201,16 @@ body {
   .btn:hover, .btn:active {
     background-color: #147b74; }
   .btn-bookmark {
-    background-color: #f0f0f0;
     color: #7a7a7a;
-    background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-bookmark_q5y1wk.svg");
-    background-repeat: no-repeat;
+    background: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-bookmark_q5y1wk.svg") no-repeat #f0f0f0;
     background-position: 0% 50%;
     background-size: 29%;
     padding-left: 8rem; }
     .btn-bookmark:hover {
       background-color: #f0f0f0; }
+    .btn-bookmark:focus {
+      filter: opacity(0.5) drop-shadow(0 0 0 #147b74) saturate(350%);
+      background-blend-mode: luminosity; }
   .btn-inactive {
     background-color: #7a7a7a;
     cursor: not-allowed; }

@@ -14,16 +14,21 @@
     }
 
     &-bookmark {
-        background-color: $color-neutral-light-gray-darkened;
         color: $color-neutral-dark-gray;
-        background-image: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-bookmark_q5y1wk.svg");
-        background-repeat: no-repeat;
+        background: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-bookmark_q5y1wk.svg")
+            no-repeat $color-neutral-light-gray-darkened;
         background-position: 0% 50%;
         background-size: 29%;
         padding-left: 8rem;
 
         &:hover {
             background-color: $color-neutral-light-gray-darkened;
+        }
+        &:focus {
+            // color: $color-primary-dark-cyan;
+            filter: opacity(0.5) drop-shadow(0 0 0 $color-primary-dark-cyan)
+                saturate(350%);
+            background-blend-mode: luminosity;
         }
     }
 
