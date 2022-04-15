@@ -138,17 +138,17 @@ body {
       .card-project {
         text-align: center; } }
   .card-modal {
-    display: flex; }
+    display: grid;
+    padding-left: 11rem; }
   .card-addon {
     position: relative;
     border: none;
     border-top: 1px solid #f0f0f0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    width: 100%;
-    margin: 0;
     padding-top: 4rem; }
   .card-radio {
+    position: absolute;
     display: grid;
     place-content: center;
     appearance: none;
@@ -158,7 +158,7 @@ body {
     border-radius: 50%;
     width: 3.5rem;
     height: 3.5rem;
-    margin-right: 3rem; }
+    transform: translateX(-7rem); }
     .card-radio::before {
       content: "";
       width: 0.65em;

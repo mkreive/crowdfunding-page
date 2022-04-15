@@ -23,7 +23,8 @@
     }
 
     &-modal {
-        display: flex;
+        display: grid;
+        padding-left: 11rem;
     }
 
     &-addon {
@@ -32,12 +33,11 @@
         border-top: 1px solid $color-neutral-light-gray-darkened;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        width: 100%;
-        margin: 0;
         padding-top: 4rem;
     }
 
     &-radio {
+        position: absolute;
         display: grid;
         place-content: center;
         appearance: none;
@@ -47,7 +47,7 @@
         border-radius: 50%;
         width: 3.5rem;
         height: 3.5rem;
-        margin-right: 3rem;
+        transform: translateX(-7rem);
 
         &::before {
             content: "";
