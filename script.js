@@ -27,14 +27,23 @@ const pledge1 = {
 };
 
 // ELEMENTS
-const backBtn = document.getElementById("backBtn");
-const modalPledge = document.querySelector(".modal-default");
-const overlay = document.querySelector(".overlay");
+// buttons
+const backProjectBtn = document.getElementById("backProjectBtn");
+const selectRewardButton = document.querySelectorAll(".reward");
 const closeBtn = document.querySelector(".btn-close");
-const pledgeElement = document.querySelectorAll(".card-modal");
 const radioElement = document.querySelectorAll(".card-radio");
+
+// modals
+const overlay = document.querySelector(".overlay");
+const modalPledge = document.querySelector(".modal-default");
+const pledgeElement = document.querySelectorAll(".card-modal");
 const pledgeAddonElement = document.querySelector(".modal-addon");
+
+// navigation
 const navLinks = document.querySelectorAll(".nav__link");
+
+// headers
+const pledgeMOdalHeaders = modalPledge.querySelectorAll(".header-medium");
 
 // FUNCTIONS
 let openedModal;
@@ -55,9 +64,14 @@ const selectPledge = function (pledge) {
     pledgeAddonElement.classList.remove("hidden");
     pledge.appendChild(pledgeAddonElement);
 };
+const activePledgeRemoving = function () {
+    let oldActivePledge = pledgeActive;
+    oldActivePledge.classList.remove("active");
+    oldActivePledge.removeChild(pledgeAddonElement);
+};
 
 // EVENT HANDLERS
-backBtn.addEventListener("click", function () {
+backProjectBtn.addEventListener("click", function () {
     openModal(modalPledge);
 });
 
@@ -67,13 +81,29 @@ closeBtn.addEventListener("click", function () {
 pledgeElement.forEach((pledge) => {
     pledge.addEventListener("click", function (e) {
         let pledge = e.currentTarget;
-        console.log(pledge);
-        selectPledge(pledge);
+        if (!pledgeActive) {
+            selectPledge(pledge);
+        } else {
+            activePledgeRemoving();
+            selectPledge(pledge);
+        }
     });
 });
 
-// navLinks.forEach((link) => {
-//     link.addEventListener("click", function (e) {
-//         console.log(e.target);
-//     });
-// });
+selectRewardButton.forEach((reward) => {
+    reward.addEventListener("click", function (e) {
+        let parentNode = e.target.parentNode.parentNode;
+        let rewardName = parentNode.querySelector(".header-medium").innerText;
+
+        pledgeMOdalHeaders.forEach((header) => {
+            if (header.innerText.trim("") == rewardName) {
+                const activeCard = header.closest(".card-modal");
+                selectPledge(activeCard);
+            } else {
+                return;
+            }
+        });
+
+        openModal(modalPledge);
+    });
+});
