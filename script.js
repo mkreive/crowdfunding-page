@@ -1,30 +1,72 @@
 "use strict";
-// DATA
-const pledge1 = {
-    name: "Mastercraft Bamboo Monitor Riser",
-    rewards: [
-        {
-            name: "Pledge with no reward",
-            countTotal: 999999,
-            countLeft: 999999,
-        },
-        {
-            name: "Bamboo Stand",
-            countTotal: 300,
-            countLeft: 101,
-        },
-        {
-            name: "Mahogany Special Edition",
-            countTotal: 300,
-            countLeft: 0,
-        },
-    ],
-    sumGoal: 100000,
-    sumBAcked: 89914,
-    numBackers: 5007,
-    daysTotal: 100,
-    daysLeft: 56,
+// ONLOAD FUNCTIONS
+const daysLeftCounter = function (startDay, endDay) {
+    let currentDay = new Date();
+    let end = new Date(endDay);
+    let start = new Date(startDay);
+    const oneDay = 24 * 60 * 60 * 1000;
+    console.log(startDay, endDay);
+    // return Math.ceil((end.getTime() - currentDay.getTime()) / oneDay);
 };
+const sum = function (a, b) {
+    return a + b;
+};
+
+// DATA
+let pledges = [
+    {
+        name: "Mastercraft Bamboo Monitor Riser",
+        rewards: [
+            {
+                name: "Pledge with no reward",
+                countTotal: 999999,
+                countLeft: 999999,
+            },
+            {
+                name: "Bamboo Stand",
+                countTotal: 300,
+                countLeft: 101,
+            },
+            {
+                name: "Mahogany Special Edition",
+                countTotal: 300,
+                countLeft: 0,
+            },
+        ],
+        sumGoal: 100000,
+        sumBacked: 89914,
+        numBackers: 5007,
+        startDate: 1,
+        endDate: 2,
+        daysTotal: 100,
+        daysLeft: startDate,
+    },
+    {
+        name: "Magnificent New Board Game Project",
+        rewards: [
+            {
+                name: "Pledge with no reward",
+                countTotal: 999999,
+                countLeft: 999999,
+            },
+            {
+                name: "Junior Pledger",
+                countTotal: 300,
+                countLeft: 101,
+            },
+            {
+                name: "Master Pledger",
+                countTotal: 300,
+                countLeft: 0,
+            },
+        ],
+        sumGoal: 500000,
+        sumBAcked: 58990,
+        numBackers: 985,
+        daysTotal: 100,
+        daysLeft: 77,
+    },
+];
 
 // ELEMENTS
 // buttons
@@ -44,8 +86,16 @@ const navLinks = document.querySelectorAll(".nav__link");
 
 // headers
 const pledgeMOdalHeaders = modalPledge.querySelectorAll(".header-medium");
+const chosenProject = document.getElementById("project");
+
+// pledge info
+const pledgeSumGoalEl = document.getElementById("sum-goal");
+const pledgeSumBackedEl = document.getElementById("sum-backed");
+const pledgeBackersCountEl = document.getElementById("backers");
+const pledgeDaysLeftEl = document.getElementById("days-left");
 
 // FUNCTIONS
+
 let openedModal;
 const openModal = function (modal) {
     openedModal = modal;
@@ -70,7 +120,19 @@ const activePledgeRemoving = function () {
     oldActivePledge.removeChild(pledgeAddonElement);
 };
 
+let activePledge;
+
 // EVENT HANDLERS
+window.addEventListener("load", function (e) {
+    let project = chosenProject.innerText;
+    const [activePledge] = pledges.filter((pledge) => pledge.name == project);
+
+    pledgeSumGoalEl.innerText = activePledge.sumGoal;
+    pledgeSumBackedEl.innerText = activePledge.sumBacked;
+    pledgeBackersCountEl.innerText = activePledge.numBackers;
+    pledgeDaysLeftEl.innerText = activePledge.daysLeft;
+});
+
 backProjectBtn.addEventListener("click", function () {
     openModal(modalPledge);
 });
