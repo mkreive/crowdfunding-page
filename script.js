@@ -123,12 +123,20 @@ const activePledgeRemoving = function () {
 const setLocalStorage = function () {
     localStorage.setItem("bookmarks", JSON.stringify(pledges));
 };
-const getLocalStorage = function (activePledge) {
+const getLocalStorage = function () {
     const data = JSON.parse(localStorage.getItem("bookmarks"));
     if (!data) return;
+    pledges = data;
+    return pledges;
+};
 
-    const [pledge] = data.filter((pledge) => pledge.name == activePledge.name);
-    return pledge.bookmarked;
+const bookmarkIt = function () {
+    bookmarkBtn.classList.add("bookmarked");
+    bookmarkBtn.innerText = "Bookmarked!";
+};
+const removeBookmark = function () {
+    bookmarkBtn.classList.remove("bookmarked");
+    bookmarkBtn.innerText = "Bookmark";
 };
 
 // EVENT HANDLERS
@@ -145,12 +153,10 @@ window.addEventListener("load", function (e) {
     progressBar.value = activePledge.sumBacked;
     progressBar.max = activePledge.sumGoal;
 
-    setLocalStorage();
-    const isBookmarked = getLocalStorage(activePledge);
-
-    if (isBookmarked) {
-        bookmarkBtn.classList.add("bookmarked");
-    }
+    let [savedData] = getLocalStorage();
+    if (savedData.bookmarked) {
+        bookmarkIt();
+    } else return;
 });
 
 backProjectBtn.addEventListener("click", function () {
@@ -191,11 +197,15 @@ selectRewardButton.forEach((reward) => {
 });
 
 bookmarkBtn.addEventListener("click", function () {
-    // if ((localStorage.bookmarked = false)) {
-    //     activePledge.bookmarked = true;
-    //     localStorage.setItem(activePledge.bookmarked, true);
-    //     bookmarkBtn.classList.add("btn-active");
-    //     bookmarkBtn.innerHTML = "Bookmarked";
-    // } else {
-    // }
+    if (activePledge.bookmarked === false) {
+        localStorage.clear();
+        activePledge.bookmarked = true;
+        setLocalStorage();
+        bookmarkIt();
+    } else if (activePledge.bookmarked === true) {
+        localStorage.clear();
+        activePledge.bookmarked = false;
+        setLocalStorage();
+        removeBookmark();
+    }
 });
