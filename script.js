@@ -95,8 +95,13 @@ const pledgeBackersCountEl = document.getElementById("backers");
 const pledgeDaysLeftEl = document.getElementById("days-left");
 const progressBar = document.getElementById("progress");
 
-// FUNCTIONS
+// VARIABLES
 let openedModal;
+let activePledge;
+let pledgeActive;
+let bookmarked;
+
+// FUNCTIONS
 const openModal = function (modal) {
     openedModal = modal;
     modal.classList.remove("hidden");
@@ -107,7 +112,6 @@ const closeModal = function (modal) {
     overlay.classList.add("hidden");
 };
 
-let pledgeActive;
 const selectPledge = function (pledge) {
     pledgeActive = pledge;
     pledge.classList.add("active");
@@ -125,38 +129,52 @@ const setLocalStorage = function () {
 };
 const getLocalStorage = function () {
     const data = JSON.parse(localStorage.getItem("bookmarks"));
-    if (!data) return;
-    pledges = data;
+    if (!data) {
+        bookmarked = false;
+    } else {
+        pledges = data;
+    }
     return pledges;
 };
 
 const bookmarkIt = function () {
     bookmarkBtn.classList.add("bookmarked");
     bookmarkBtn.innerText = "Bookmarked!";
+    bookmarked = true;
 };
 const removeBookmark = function () {
     bookmarkBtn.classList.remove("bookmarked");
     bookmarkBtn.innerText = "Bookmark";
+    bookmarked = false;
+};
+
+const innerTextSetter = function (pledge) {
+    pledgeSumGoalEl.innerText = pledge.sumGoal;
+    pledgeSumBackedEl.innerText = pledge.sumBacked;
+    pledgeBackersCountEl.innerText = pledge.numBackers;
+    pledgeDaysLeftEl.innerText = pledge.daysLeft;
+    progressBar.value = pledge.sumBacked;
+    progressBar.max = pledge.sumGoal;
 };
 
 // EVENT HANDLERS
-let activePledge;
-
-window.addEventListener("load", function (e) {
-    let project = chosenProject.innerText;
+window.addEventListener("load", function () {
+    const savedData = getLocalStorage();
+    const project = chosenProject.innerText;
     [activePledge] = pledges.filter((pledge) => pledge.name == project);
 
-    pledgeSumGoalEl.innerText = activePledge.sumGoal;
-    pledgeSumBackedEl.innerText = activePledge.sumBacked;
-    pledgeBackersCountEl.innerText = activePledge.numBackers;
-    pledgeDaysLeftEl.innerText = activePledge.daysLeft;
-    progressBar.value = activePledge.sumBacked;
-    progressBar.max = activePledge.sumGoal;
+    innerTextSetter(activePledge);
+    console.log(savedData);
+    const foundPledge = savedData.filter(
+        (pledge) => pledge.name === activePledge.name
+    );
 
-    let [savedData] = getLocalStorage();
-    if (savedData.bookmarked) {
+    if (foundPledge.bookmarked === true) {
         bookmarkIt();
-    } else return;
+        console.log("bookmarked");
+    } else {
+        console.log("not bookmarked");
+    }
 });
 
 backProjectBtn.addEventListener("click", function () {
