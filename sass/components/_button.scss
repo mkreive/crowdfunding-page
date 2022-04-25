@@ -21,14 +21,15 @@
         background-size: 29%;
         padding-left: 8rem;
 
-        &:hover {
+        &:hover,
+        &:active {
             background-color: $color-neutral-light-gray-darkened;
+            color: $color-primary-moderate-cyan;
         }
         &:focus {
-            // color: $color-primary-dark-cyan;
-            filter: opacity(0.5) drop-shadow(0 0 0 $color-primary-dark-cyan)
-                saturate(350%);
-            background-blend-mode: luminosity;
+            background: url("https://res.cloudinary.com/kreiva/image/upload/v1649670969/FrontendMentor/CrowdFunding%20Page/icon-check_tofrnr.svg")
+                no-repeat $color-neutral-light-gray-darkened;
+            color: $color-primary-moderate-cyan;
         }
     }
 

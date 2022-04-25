@@ -37,6 +37,7 @@ let pledges = [
         startDate: "2020.01.13",
         daysTotal: 100,
         daysLeft: 70,
+        bookmarked: false,
     },
     {
         name: "Magnificent New Board Game Project",
@@ -58,10 +59,11 @@ let pledges = [
             },
         ],
         sumGoal: 500000,
-        sumBAcked: 58990,
+        sumBacked: 58990,
         numBackers: 985,
         daysTotal: 100,
         daysLeft: 77,
+        bookmarked: false,
     },
 ];
 
@@ -71,6 +73,7 @@ const backProjectBtn = document.getElementById("backProjectBtn");
 const selectRewardButton = document.querySelectorAll(".reward");
 const closeBtn = document.querySelector(".btn-close");
 const radioElement = document.querySelectorAll(".card-radio");
+const bookmarkBtn = document.querySelector(".btn-bookmark");
 
 // modals
 const overlay = document.querySelector(".overlay");
@@ -90,9 +93,9 @@ const pledgeSumGoalEl = document.getElementById("sum-goal");
 const pledgeSumBackedEl = document.getElementById("sum-backed");
 const pledgeBackersCountEl = document.getElementById("backers");
 const pledgeDaysLeftEl = document.getElementById("days-left");
+const progressBar = document.getElementById("progress");
 
 // FUNCTIONS
-
 let openedModal;
 const openModal = function (modal) {
     openedModal = modal;
@@ -117,17 +120,22 @@ const activePledgeRemoving = function () {
     oldActivePledge.removeChild(pledgeAddonElement);
 };
 
-let activePledge;
-
 // EVENT HANDLERS
+let activePledge;
+let bookmarks = localStorage;
+console.log(bookmarks);
 window.addEventListener("load", function (e) {
     let project = chosenProject.innerText;
-    const [activePledge] = pledges.filter((pledge) => pledge.name == project);
+    [activePledge] = pledges.filter((pledge) => pledge.name == project);
 
     pledgeSumGoalEl.innerText = activePledge.sumGoal;
     pledgeSumBackedEl.innerText = activePledge.sumBacked;
     pledgeBackersCountEl.innerText = activePledge.numBackers;
     pledgeDaysLeftEl.innerText = activePledge.daysLeft;
+    progressBar.value = activePledge.sumBacked;
+    progressBar.max = activePledge.sumGoal;
+
+    // return activePledge;
 });
 
 backProjectBtn.addEventListener("click", function () {
@@ -165,4 +173,14 @@ selectRewardButton.forEach((reward) => {
 
         openModal(modalPledge);
     });
+});
+
+bookmarkBtn.addEventListener("click", function () {
+    if ((localStorage.bookmarked = false)) {
+        activePledge.bookmarked = true;
+        localStorage.setItem(activePledge.bookmarked, true);
+        bookmarkBtn.classList.add("btn-active");
+        bookmarkBtn.innerHTML = "Bookmarked";
+    } else {
+    }
 });
