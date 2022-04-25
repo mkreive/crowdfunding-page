@@ -1,16 +1,14 @@
 "use strict";
 // ONLOAD FUNCTIONS
-const daysLeftCounter = function (startDay, endDay) {
-    let currentDay = new Date();
-    let end = new Date(endDay);
-    let start = new Date(startDay);
-    const oneDay = 24 * 60 * 60 * 1000;
-    console.log(startDay, endDay);
-    // return Math.ceil((end.getTime() - currentDay.getTime()) / oneDay);
-};
-const sum = function (a, b) {
-    return a + b;
-};
+// const daysLeftCounter = function (startDay, endDay) {
+//     let currentDay = new Date();
+//     let end = new Date(endDay);
+//     let start = new Date(startDay);
+//     const oneDay = 24 * 60 * 60 * 1000;
+//     console.log(currentDay);
+//     console.log(startDay);
+//     // return Math.ceil((end.getTime() - currentDay.getTime()) / oneDay);
+// };
 
 // DATA
 let pledges = [
@@ -36,10 +34,9 @@ let pledges = [
         sumGoal: 100000,
         sumBacked: 89914,
         numBackers: 5007,
-        startDate: 1,
-        endDate: 2,
+        startDate: "2020.01.13",
         daysTotal: 100,
-        daysLeft: startDate,
+        daysLeft: 70,
     },
     {
         name: "Magnificent New Board Game Project",
