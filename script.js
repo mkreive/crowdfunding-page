@@ -120,10 +120,20 @@ const activePledgeRemoving = function () {
     oldActivePledge.removeChild(pledgeAddonElement);
 };
 
+const setLocalStorage = function () {
+    localStorage.setItem("bookmarks", JSON.stringify(pledges));
+};
+const getLocalStorage = function (activePledge) {
+    const data = JSON.parse(localStorage.getItem("bookmarks"));
+    if (!data) return;
+
+    const [pledge] = data.filter((pledge) => pledge.name == activePledge.name);
+    return pledge.bookmarked;
+};
+
 // EVENT HANDLERS
 let activePledge;
-let bookmarks = localStorage;
-console.log(bookmarks);
+
 window.addEventListener("load", function (e) {
     let project = chosenProject.innerText;
     [activePledge] = pledges.filter((pledge) => pledge.name == project);
@@ -135,7 +145,12 @@ window.addEventListener("load", function (e) {
     progressBar.value = activePledge.sumBacked;
     progressBar.max = activePledge.sumGoal;
 
-    // return activePledge;
+    setLocalStorage();
+    const isBookmarked = getLocalStorage(activePledge);
+
+    if (isBookmarked) {
+        bookmarkBtn.classList.add("bookmarked");
+    }
 });
 
 backProjectBtn.addEventListener("click", function () {
@@ -176,11 +191,11 @@ selectRewardButton.forEach((reward) => {
 });
 
 bookmarkBtn.addEventListener("click", function () {
-    if ((localStorage.bookmarked = false)) {
-        activePledge.bookmarked = true;
-        localStorage.setItem(activePledge.bookmarked, true);
-        bookmarkBtn.classList.add("btn-active");
-        bookmarkBtn.innerHTML = "Bookmarked";
-    } else {
-    }
+    // if ((localStorage.bookmarked = false)) {
+    //     activePledge.bookmarked = true;
+    //     localStorage.setItem(activePledge.bookmarked, true);
+    //     bookmarkBtn.classList.add("btn-active");
+    //     bookmarkBtn.innerHTML = "Bookmarked";
+    // } else {
+    // }
 });
