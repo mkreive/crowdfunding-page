@@ -17,19 +17,22 @@ let pledges = [
         name: "Mastercraft Bamboo Monitor Riser",
         rewards: [
             {
-                name: "Pledge with no reward",
-                countTotal: 999999,
-                countLeft: 999999,
+                name: "Black Edition Stand",
+                countTotal: 200,
+                countLeft: 64,
+                minSum: 25,
             },
             {
                 name: "Bamboo Stand",
                 countTotal: 300,
                 countLeft: 101,
+                minSum: 75,
             },
             {
                 name: "Mahogany Special Edition",
-                countTotal: 300,
+                countTotal: 100,
                 countLeft: 0,
+                minSum: 200,
             },
         ],
         sumGoal: 100000,
@@ -45,19 +48,16 @@ let pledges = [
         name: "Magnificent New Board Game Project",
         rewards: [
             {
-                name: "Pledge with no reward",
-                countTotal: 999999,
-                countLeft: 999999,
-            },
-            {
                 name: "Junior Pledger",
                 countTotal: 300,
                 countLeft: 101,
+                minSum: 50,
             },
             {
                 name: "Master Pledger",
                 countTotal: 300,
                 countLeft: 0,
+                minSum: 300,
             },
         ],
         sumGoal: 500000,
@@ -89,6 +89,7 @@ const navLinks = document.querySelectorAll(".nav__link");
 // headers
 const pledgeMOdalHeaders = modalPledge.querySelectorAll(".header-medium");
 const chosenProject = document.getElementById("project");
+const rewardHeaderEl = document.querySelectorAll(".reward-name");
 
 // pledge info
 const pledgeSumGoalEl = document.getElementById("sum-goal");
@@ -96,6 +97,7 @@ const pledgeSumBackedEl = document.getElementById("sum-backed");
 const pledgeBackersCountEl = document.getElementById("backers");
 const pledgeDaysLeftEl = document.getElementById("days-left");
 const progressBar = document.getElementById("progress");
+const pledgeInfoEl = document.querySelector(".pledge-main");
 
 // VARIABLES
 let openedModal;
@@ -150,6 +152,45 @@ const removeBookmark = function () {
     bookmarked = false;
 };
 
+const renderReward = function (pledge) {
+    const rewards = pledge.rewards;
+    if (!rewards) return;
+
+    rewards.forEach((reward) => {
+        let html = `
+        <div class="${
+            reward.countLeft < 1
+                ? "card card-pledge inactive"
+                : "card card-pledge "
+        }">
+            <div class="couples">
+                <h3 class="header-medium reward-name">
+                    ${reward.name}
+                </h3>
+                <span class="bidding">Pledge $${reward.minSum} or more</span>
+            </div>
+            <p class="text">
+                You get an ergonomic stand made of natural
+                bamboo. You've helped us launch our promotional
+                campaign, and you’ll be added to a special
+                Backer member list.
+            </p>
+            <div class="couples">
+                <div class="couples-left">
+                <span class="header-big">${reward.countLeft}</span
+                    ><span class="text">left</span>
+            </div>
+            <button class="btn reward">
+                ${reward.countLeft > 1 ? "Select Reward" : "Out of Stock"}
+            </button>
+            </div>
+        </div>
+        `;
+
+        pledgeInfoEl.insertAdjacentHTML("beforeend", html);
+    });
+};
+
 const innerTextSetter = function (pledge) {
     pledgeSumGoalEl.innerText = `of $${pledge.sumGoal.toLocaleString()} backed`;
     pledgeSumBackedEl.innerText = `$${pledge.sumBacked.toLocaleString()}`;
@@ -180,7 +221,11 @@ window.addEventListener("load", function () {
             activePledge = pledges[0];
         }
     }
+
     innerTextSetter(activePledge);
+
+    activePledge.rewards;
+    renderReward(activePledge);
 });
 
 bookmarkBtn.addEventListener("click", function () {
