@@ -151,12 +151,12 @@ const removeBookmark = function () {
 };
 
 const innerTextSetter = function (pledge) {
-    pledgeSumGoalEl.innerText = pledge.sumGoal;
-    pledgeSumBackedEl.innerText = pledge.sumBacked;
-    pledgeBackersCountEl.innerText = pledge.numBackers;
+    pledgeSumGoalEl.innerText = `of $${pledge.sumGoal.toLocaleString()} backed`;
+    pledgeSumBackedEl.innerText = `$${pledge.sumBacked.toLocaleString()}`;
+    pledgeBackersCountEl.innerText = pledge.numBackers.toLocaleString();
     pledgeDaysLeftEl.innerText = pledge.daysLeft;
-    progressBar.value = pledge.sumBacked;
-    progressBar.max = pledge.sumGoal;
+    progressBar.value = +pledge.sumBacked;
+    progressBar.max = +pledge.sumGoal;
 };
 
 // EVENT HANDLERS
@@ -164,12 +164,16 @@ window.addEventListener("load", function () {
     const savedData = getLocalStorage();
 
     if (!savedData) {
-        return (activePledge = pledges[0]);
+        activePledge = pledges[0];
     } else if (savedData) {
         [activePledge] = savedData.filter(
             (pledge) => pledge.bookmarked === true
         );
         bookmarkIt();
+        if (!activePledge) {
+            activePledge = pledges[0];
+            console.log("if condition");
+        }
     }
 
     innerTextSetter(activePledge);
