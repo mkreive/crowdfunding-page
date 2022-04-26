@@ -13,6 +13,7 @@
 // DATA
 let pledges = [
     {
+        id: 1,
         name: "Mastercraft Bamboo Monitor Riser",
         rewards: [
             {
@@ -40,6 +41,7 @@ let pledges = [
         bookmarked: false,
     },
     {
+        id: 2,
         name: "Magnificent New Board Game Project",
         rewards: [
             {
@@ -125,16 +127,16 @@ const activePledgeRemoving = function () {
 };
 
 const setLocalStorage = function () {
-    localStorage.setItem("bookmarks", JSON.stringify(pledges));
+    localStorage.setItem("pledge", JSON.stringify(pledges));
 };
 const getLocalStorage = function () {
-    const data = JSON.parse(localStorage.getItem("bookmarks"));
+    const data = JSON.parse(localStorage.getItem("pledge"));
     if (!data) {
         bookmarked = false;
     } else {
         pledges = data;
     }
-    return pledges;
+    return data;
 };
 
 const bookmarkIt = function () {
@@ -160,20 +162,30 @@ const innerTextSetter = function (pledge) {
 // EVENT HANDLERS
 window.addEventListener("load", function () {
     const savedData = getLocalStorage();
-    const project = chosenProject.innerText;
-    [activePledge] = pledges.filter((pledge) => pledge.name == project);
+
+    if (!savedData) {
+        return (activePledge = pledges[0]);
+    } else if (savedData) {
+        [activePledge] = savedData.filter(
+            (pledge) => pledge.bookmarked === true
+        );
+        bookmarkIt();
+    }
 
     innerTextSetter(activePledge);
-    console.log(savedData);
-    const foundPledge = savedData.filter(
-        (pledge) => pledge.name === activePledge.name
-    );
+});
 
-    if (foundPledge.bookmarked === true) {
+bookmarkBtn.addEventListener("click", function () {
+    if (activePledge.bookmarked === false) {
+        localStorage.clear();
+        activePledge.bookmarked = true;
+        setLocalStorage();
         bookmarkIt();
-        console.log("bookmarked");
-    } else {
-        console.log("not bookmarked");
+    } else if (activePledge.bookmarked === true) {
+        localStorage.clear();
+        activePledge.bookmarked = false;
+        setLocalStorage();
+        removeBookmark();
     }
 });
 
@@ -184,6 +196,7 @@ backProjectBtn.addEventListener("click", function () {
 closeBtn.addEventListener("click", function () {
     closeModal(modalPledge);
 });
+
 pledgeElement.forEach((pledge) => {
     pledge.addEventListener("click", function (e) {
         let pledge = e.currentTarget;
@@ -212,18 +225,4 @@ selectRewardButton.forEach((reward) => {
 
         openModal(modalPledge);
     });
-});
-
-bookmarkBtn.addEventListener("click", function () {
-    if (activePledge.bookmarked === false) {
-        localStorage.clear();
-        activePledge.bookmarked = true;
-        setLocalStorage();
-        bookmarkIt();
-    } else if (activePledge.bookmarked === true) {
-        localStorage.clear();
-        activePledge.bookmarked = false;
-        setLocalStorage();
-        removeBookmark();
-    }
 });
