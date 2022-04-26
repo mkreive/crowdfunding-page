@@ -166,16 +166,20 @@ window.addEventListener("load", function () {
     if (!savedData) {
         activePledge = pledges[0];
     } else if (savedData) {
-        [activePledge] = savedData.filter(
+        const [...bookmarkedPledges] = savedData.filter(
             (pledge) => pledge.bookmarked === true
         );
-        bookmarkIt();
+
+        if (bookmarkedPledges.length < 1) {
+            activePledge = pledges[0];
+        } else {
+            bookmarkIt();
+            activePledge = bookmarkedPledges[0];
+        }
         if (!activePledge) {
             activePledge = pledges[0];
-            console.log("if condition");
         }
     }
-
     innerTextSetter(activePledge);
 });
 
