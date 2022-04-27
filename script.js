@@ -87,6 +87,7 @@ const overlay = document.querySelector(".overlay");
 const modalPledge = document.querySelector(".modal-default");
 const pledgeElement = document.querySelectorAll(".card-modal");
 const pledgeAddonElement = document.querySelector(".modal-addon");
+const successModal = document.querySelector(".modal-success");
 
 // navigation
 const navLinks = document.querySelectorAll(".nav__link");
@@ -230,15 +231,33 @@ const renderRewardsModal = function (pledge) {
     });
 
     const radioButtonEl = document.querySelectorAll(".card-radio");
+    const rewardSubmitBtn = document.querySelectorAll(".submit-pledge");
+
     radioButtonEl.forEach((radio) => {
         radio.addEventListener("click", function (e) {
             const parentNode = e.target.parentNode.parentNode;
             selectPledge(parentNode);
         });
     });
+
+    rewardSubmitBtn.forEach((submitBtn) => {
+        submitBtn.addEventListener("click", function (e) {
+            const inputValue = e.target.previousElementSibling.value;
+            if (inputValue > 0 && inputValue) {
+                closeModal(modalPledge);
+                openModal(successModal);
+            } else return;
+        });
+    });
+
+    const closeBtn = document.querySelector(".close");
+    closeBtn.addEventListener("click", function () {
+        closeModal(successModal);
+    });
 };
 
 // UI stuff
+
 const openModal = function (modal) {
     openedModal = modal;
     modal.classList.remove("hidden");
