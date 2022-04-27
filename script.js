@@ -262,20 +262,23 @@ pledgeElement.forEach((pledge) => {
     });
 });
 
-selectRewardButton.forEach((reward) => {
-    reward.addEventListener("click", function (e) {
-        let parentNode = e.target.parentNode.parentNode;
-        let rewardName = parentNode.querySelector(".header-medium").innerText;
+// selectRewardButton.forEach((rewardBtn) => {
+//     rewardBtn.addEventListener("click", function () {
+//         console.log("clicked");
+//         // let parentNode = e.target.parentNode.parentNode;
+//         // let rewardName = parentNode.querySelector(".header-medium").innerText;
 
-        pledgeMOdalHeaders.forEach((header) => {
-            if (header.innerText.trim("") == rewardName) {
-                const activeCard = header.closest(".card-modal");
-                selectPledge(activeCard);
-            } else {
-                return;
-            }
-        });
+//         // pledgeMOdalHeaders.forEach((header) => {
+//         //     if (header.innerText.trim("") == rewardName) {
+//         //         const activeCard = header.closest(".card-modal");
+//         //         selectPledge(activeCard);
+//         //     } else {
+//         //         return;
+//         //     }
+//         // });
 
-        openModal(modalPledge);
-    });
-});
+//         // openModal(modalPledge);
+//     });
+// });
+
+console.log(selectRewardButton);
