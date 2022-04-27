@@ -19,14 +19,14 @@ let pledges = [
             {
                 name: "Black Edition Stand",
                 countTotal: 200,
-                countLeft: 64,
-                minSum: 25,
+                countLeft: 55,
+                minSum: 30,
             },
             {
                 name: "Bamboo Stand",
                 countTotal: 300,
-                countLeft: 101,
-                minSum: 75,
+                countLeft: 99,
+                minSum: 90,
             },
             {
                 name: "Mahogany Special Edition",
@@ -99,6 +99,10 @@ const pledgeDaysLeftEl = document.getElementById("days-left");
 const progressBar = document.getElementById("progress");
 const pledgeInfoEl = document.querySelector(".pledge-main");
 
+// rewards
+const rewardsCountLeftEl = document.querySelectorAll(".rewards-count");
+const rewardBiddingSumEl = document.querySelectorAll(".bidding");
+
 // VARIABLES
 let openedModal;
 let activePledge;
@@ -106,6 +110,35 @@ let pledgeActive;
 let bookmarked;
 
 // FUNCTIONS
+// local storage
+const setLocalStorage = function () {
+    localStorage.setItem("pledge", JSON.stringify(pledges));
+};
+const getLocalStorage = function () {
+    const data = JSON.parse(localStorage.getItem("pledge"));
+    if (!data) {
+        bookmarked = false;
+    } else {
+        pledges = data;
+    }
+    return data;
+};
+
+// rendering elements
+const innerTextSetter = function (pledge) {
+    pledgeSumGoalEl.innerText = `of $${pledge.sumGoal.toLocaleString()} backed`;
+    pledgeSumBackedEl.innerText = `$${pledge.sumBacked.toLocaleString()}`;
+    pledgeBackersCountEl.innerText = pledge.numBackers.toLocaleString();
+    pledgeDaysLeftEl.innerText = pledge.daysLeft;
+    progressBar.value = +pledge.sumBacked;
+    progressBar.max = +pledge.sumGoal;
+};
+const renderReward = function (pledge) {
+    const rewards = pledge.rewards;
+    if (!rewards) return;
+};
+
+// UI stuff
 const openModal = function (modal) {
     openedModal = modal;
     modal.classList.remove("hidden");
@@ -128,19 +161,6 @@ const activePledgeRemoving = function () {
     oldActivePledge.removeChild(pledgeAddonElement);
 };
 
-const setLocalStorage = function () {
-    localStorage.setItem("pledge", JSON.stringify(pledges));
-};
-const getLocalStorage = function () {
-    const data = JSON.parse(localStorage.getItem("pledge"));
-    if (!data) {
-        bookmarked = false;
-    } else {
-        pledges = data;
-    }
-    return data;
-};
-
 const bookmarkIt = function () {
     bookmarkBtn.classList.add("bookmarked");
     bookmarkBtn.innerText = "Bookmarked!";
@@ -152,55 +172,8 @@ const removeBookmark = function () {
     bookmarked = false;
 };
 
-const renderReward = function (pledge) {
-    const rewards = pledge.rewards;
-    if (!rewards) return;
-
-    rewards.forEach((reward) => {
-        let html = `
-        <div class="${
-            reward.countLeft < 1
-                ? "card card-pledge inactive"
-                : "card card-pledge "
-        }">
-            <div class="couples">
-                <h3 class="header-medium reward-name">
-                    ${reward.name}
-                </h3>
-                <span class="bidding">Pledge $${reward.minSum} or more</span>
-            </div>
-            <p class="text">
-                You get an ergonomic stand made of natural
-                bamboo. You've helped us launch our promotional
-                campaign, and you’ll be added to a special
-                Backer member list.
-            </p>
-            <div class="couples">
-                <div class="couples-left">
-                <span class="header-big">${reward.countLeft}</span
-                    ><span class="text">left</span>
-            </div>
-            <button class="btn reward">
-                ${reward.countLeft > 1 ? "Select Reward" : "Out of Stock"}
-            </button>
-            </div>
-        </div>
-        `;
-
-        pledgeInfoEl.insertAdjacentHTML("beforeend", html);
-    });
-};
-
-const innerTextSetter = function (pledge) {
-    pledgeSumGoalEl.innerText = `of $${pledge.sumGoal.toLocaleString()} backed`;
-    pledgeSumBackedEl.innerText = `$${pledge.sumBacked.toLocaleString()}`;
-    pledgeBackersCountEl.innerText = pledge.numBackers.toLocaleString();
-    pledgeDaysLeftEl.innerText = pledge.daysLeft;
-    progressBar.value = +pledge.sumBacked;
-    progressBar.max = +pledge.sumGoal;
-};
-
 // EVENT HANDLERS
+// page load
 window.addEventListener("load", function () {
     const savedData = getLocalStorage();
 
@@ -223,11 +196,10 @@ window.addEventListener("load", function () {
     }
 
     innerTextSetter(activePledge);
-
-    activePledge.rewards;
     renderReward(activePledge);
 });
 
+// buttons listeners
 bookmarkBtn.addEventListener("click", function () {
     if (activePledge.bookmarked === false) {
         localStorage.clear();
@@ -246,6 +218,23 @@ backProjectBtn.addEventListener("click", function () {
     openModal(modalPledge);
 });
 
+selectRewardButton.forEach((rewardBtn) => {
+    rewardBtn.addEventListener("click", function (e) {
+        let parentNode = e.target.parentNode.parentNode;
+        let rewardName = parentNode.querySelector(".header-medium").innerText;
+
+        pledgeMOdalHeaders.forEach((header) => {
+            if (header.innerText.trim("") == rewardName) {
+                const activeCard = header.closest(".card-modal");
+                selectPledge(activeCard);
+            } else {
+                return;
+            }
+        });
+        openModal(modalPledge);
+    });
+});
+
 closeBtn.addEventListener("click", function () {
     closeModal(modalPledge);
 });
@@ -261,24 +250,3 @@ pledgeElement.forEach((pledge) => {
         }
     });
 });
-
-// selectRewardButton.forEach((rewardBtn) => {
-//     rewardBtn.addEventListener("click", function () {
-//         console.log("clicked");
-//         // let parentNode = e.target.parentNode.parentNode;
-//         // let rewardName = parentNode.querySelector(".header-medium").innerText;
-
-//         // pledgeMOdalHeaders.forEach((header) => {
-//         //     if (header.innerText.trim("") == rewardName) {
-//         //         const activeCard = header.closest(".card-modal");
-//         //         selectPledge(activeCard);
-//         //     } else {
-//         //         return;
-//         //     }
-//         // });
-
-//         // openModal(modalPledge);
-//     });
-// });
-
-console.log(selectRewardButton);
