@@ -17,18 +17,21 @@ let pledges = [
         name: "Mastercraft Bamboo Monitor Riser",
         rewards: [
             {
+                id: 11,
                 name: "Black Edition Stand",
                 countTotal: 200,
                 countLeft: 55,
                 minSum: 30,
             },
             {
+                id: 12,
                 name: "Bamboo Stand",
                 countTotal: 300,
                 countLeft: 99,
                 minSum: 90,
             },
             {
+                id: 13,
                 name: "Mahogany Special Edition",
                 countTotal: 100,
                 countLeft: 0,
@@ -48,12 +51,14 @@ let pledges = [
         name: "Magnificent New Board Game Project",
         rewards: [
             {
+                id: 21,
                 name: "Junior Pledger",
                 countTotal: 300,
                 countLeft: 101,
                 minSum: 50,
             },
             {
+                id: 22,
                 name: "Master Pledger",
                 countTotal: 300,
                 countLeft: 0,
@@ -97,9 +102,10 @@ const pledgeSumBackedEl = document.getElementById("sum-backed");
 const pledgeBackersCountEl = document.getElementById("backers");
 const pledgeDaysLeftEl = document.getElementById("days-left");
 const progressBar = document.getElementById("progress");
-const pledgeInfoEl = document.querySelector(".pledge-main");
 
-// rewards
+// rewards card
+const pledgeInfoEl = document.querySelector(".pledge-main");
+const rewardsCardEl = document.querySelectorAll(".card-pledge");
 const rewardsCountLeftEl = document.querySelectorAll(".rewards-count");
 const rewardBiddingSumEl = document.querySelectorAll(".bidding");
 
@@ -136,6 +142,59 @@ const innerTextSetter = function (pledge) {
 const renderReward = function (pledge) {
     const rewards = pledge.rewards;
     if (!rewards) return;
+
+    rewards.forEach((reward) => {
+        const html = `
+        <div class="${
+            reward.countLeft > 0
+                ? "card card-pledge"
+                : "card card-pledge inactive"
+        }" >
+        <div class="couples">
+            <h3 class="header-medium reward-name" id="${reward.id}">
+                ${reward.name}
+            </h3>
+            <span class="bidding">Pledge $${reward.minSum} or more</span>
+        </div>
+        <p class="text">
+            You get a Black Special Edition computer stand
+            and a personal thank you. You’ll be added to our
+            Backer member list. Shipping is included.
+        </p>
+        <div class="couples">
+            <div class="couples-left">
+                <span class="header-big rewards-count"
+                    >${reward.countLeft}</span
+                ><span class="text">left</span>
+            </div>
+            <button class="btn reward">
+                ${reward.countLeft > 0 ? "Select Reward" : "Out of Stock"}
+            </button>
+        </div>
+    </div>`;
+
+        pledgeInfoEl.insertAdjacentHTML("beforeend", html);
+    });
+
+    const selectRewardButton = document.querySelectorAll(".reward");
+    selectRewardButton.forEach((rewardBtn) => {
+        rewardBtn.addEventListener("click", function (e) {
+            console.log(rewardBtn);
+            let parentNode = e.target.parentNode.parentNode;
+            let rewardName =
+                parentNode.querySelector(".header-medium").innerText;
+
+            pledgeMOdalHeaders.forEach((header) => {
+                if (header.innerText.trim("") == rewardName) {
+                    const activeCard = header.closest(".card-modal");
+                    selectPledge(activeCard);
+                } else {
+                    return;
+                }
+            });
+            openModal(modalPledge);
+        });
+    });
 };
 
 // UI stuff
@@ -216,23 +275,6 @@ bookmarkBtn.addEventListener("click", function () {
 
 backProjectBtn.addEventListener("click", function () {
     openModal(modalPledge);
-});
-
-selectRewardButton.forEach((rewardBtn) => {
-    rewardBtn.addEventListener("click", function (e) {
-        let parentNode = e.target.parentNode.parentNode;
-        let rewardName = parentNode.querySelector(".header-medium").innerText;
-
-        pledgeMOdalHeaders.forEach((header) => {
-            if (header.innerText.trim("") == rewardName) {
-                const activeCard = header.closest(".card-modal");
-                selectPledge(activeCard);
-            } else {
-                return;
-            }
-        });
-        openModal(modalPledge);
-    });
 });
 
 closeBtn.addEventListener("click", function () {
