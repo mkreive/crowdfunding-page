@@ -179,7 +179,6 @@ const renderReward = function (pledge) {
     const selectRewardButton = document.querySelectorAll(".reward");
     selectRewardButton.forEach((rewardBtn) => {
         rewardBtn.addEventListener("click", function (e) {
-            console.log(rewardBtn);
             let parentNode = e.target.parentNode.parentNode;
             let rewardName =
                 parentNode.querySelector(".header-medium").innerText;
@@ -197,11 +196,54 @@ const renderReward = function (pledge) {
     });
 };
 
+const renderRewardsModal = function (pledge) {
+    const rewards = pledge.rewards;
+    if (!rewards) return;
+
+    rewards.forEach((reward) => {
+        const html = `
+            <div class="card card-modal">
+            <div>
+                <input type="radio" name="radio" class="card-radio" />
+            </div>
+            <div>
+                <div class="couples">
+                    <div class="couples-left">
+                        <h3 class="header-medium">${reward.name}</h3>
+                        <span class="bidding">Pledge $${reward.minSum} or more</span>
+                    </div>
+                    <div class="couples-left">
+                        <span class="header-medium">${reward.countLeft}</span
+                        ><span class="text">left</span>
+                    </div>
+                </div>
+            <p class="text">
+                You get an ergonomic stand made of natural bamboo.
+                You've helped us launch our promotional campaign,
+                and you’ll be added to a special Backer member list.
+            </p>
+        </div>
+    </div>
+    `;
+
+        modalPledge.insertAdjacentHTML("beforeend", html);
+    });
+
+    const radioButtonEl = document.querySelectorAll(".card-radio");
+    radioButtonEl.forEach((radio) => {
+        radio.addEventListener("click", function (e) {
+            const parentNode = e.target.parentNode.parentNode;
+            selectPledge(parentNode);
+        });
+    });
+};
+
 // UI stuff
 const openModal = function (modal) {
     openedModal = modal;
     modal.classList.remove("hidden");
     overlay.classList.remove("hidden");
+    renderRewardsModal(activePledge);
 };
 const closeModal = function (modal) {
     modal.classList.add("hidden");
@@ -279,16 +321,4 @@ backProjectBtn.addEventListener("click", function () {
 
 closeBtn.addEventListener("click", function () {
     closeModal(modalPledge);
-});
-
-pledgeElement.forEach((pledge) => {
-    pledge.addEventListener("click", function (e) {
-        let pledge = e.currentTarget;
-        if (!pledgeActive) {
-            selectPledge(pledge);
-        } else {
-            activePledgeRemoving();
-            selectPledge(pledge);
-        }
-    });
 });
