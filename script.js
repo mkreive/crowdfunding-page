@@ -263,6 +263,7 @@ const openModal = function (modal) {
     modal.classList.remove("hidden");
     overlay.classList.remove("hidden");
     renderRewardsModal(activePledge);
+    scroll(0, 0);
 };
 const closeModal = function (modal) {
     modal.classList.add("hidden");
