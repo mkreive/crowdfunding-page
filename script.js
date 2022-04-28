@@ -260,18 +260,7 @@ const removeBookmark = function () {
 const savePledgingInfo = function (value, reward) {
     const pledgeSum = value;
     const pledgedRewardId = reward;
-    const pldegeId = activePledge.id;
-    let localStorageData = getLocalStorage();
-
-    if (!localStorageData) {
-        const [pledgeSelected] = pledges.filter(
-            (pledge) => pledge.id === pldegeId
-        );
-        const [rewardSelected] = pledgeSelected.rewards.filter(
-            (rew) => rew.id == pledgedRewardId
-        );
-        rewardSelected.countLeft--;
-    }
+    let localStorageData = getLocalStorage("pledge");
 };
 
 // EVENT HANDLERS
@@ -332,23 +321,22 @@ backProjectBtn.addEventListener("click", function () {
 const rewardModalListener = function (rewards) {
     const radioButtonEl = document.querySelectorAll(".card-radio");
     const rewardSubmitBtn = document.querySelectorAll(".submit-pledge");
-
     radioButtonEl.forEach((radio) => {
         radio.addEventListener("click", function (e) {
-            parentNode = e.target.parentNode.parentNode;
+            const parentNode = e.target.parentNode.parentNode;
             selectPledge(parentNode);
-            chosenRewardId = parentNode;
-        });
-    });
 
-    rewardSubmitBtn.forEach((submitBtn) => {
-        submitBtn.addEventListener("click", function (e) {
-            const inputValue = e.target.previousElementSibling.value;
-            if (inputValue > 0 && inputValue) {
-                closeModal(modalPledge);
-                openModal(successModal);
-                savePledgingInfo(inputValue, chosenRewardId);
-            } else return;
+            const chosenRewardId = parentNode.id;
+            const rewardBtnSubmit = parentNode.querySelector("button");
+
+            rewardBtnSubmit.addEventListener("click", function (e) {
+                const inputValue = e.target.previousElementSibling.value;
+                if (inputValue > 0 && inputValue) {
+                    savePledgingInfo(inputValue, chosenRewardId);
+                    closeModal(modalPledge);
+                    openModal(successModal);
+                } else return;
+            });
         });
     });
 
