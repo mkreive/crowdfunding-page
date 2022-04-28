@@ -17,21 +17,21 @@ let pledges = [
         name: "Mastercraft Bamboo Monitor Riser",
         rewards: [
             {
-                id: 11,
+                id: 1,
                 name: "Black Edition Stand",
                 countTotal: 200,
                 countLeft: 55,
                 minSum: 30,
             },
             {
-                id: 12,
+                id: 2,
                 name: "Bamboo Stand",
                 countTotal: 300,
                 countLeft: 99,
                 minSum: 90,
             },
             {
-                id: 13,
+                id: 3,
                 name: "Mahogany Special Edition",
                 countTotal: 100,
                 countLeft: 0,
@@ -51,14 +51,14 @@ let pledges = [
         name: "Magnificent New Board Game Project",
         rewards: [
             {
-                id: 21,
+                id: 1,
                 name: "Junior Pledger",
                 countTotal: 300,
                 countLeft: 101,
                 minSum: 50,
             },
             {
-                id: 22,
+                id: 2,
                 name: "Master Pledger",
                 countTotal: 300,
                 countLeft: 0,
@@ -115,6 +115,7 @@ let openedModal;
 let activePledge;
 let pledgeActive;
 let bookmarked;
+let chosenReward;
 
 // FUNCTIONS
 // local storage
@@ -129,6 +130,23 @@ const getLocalStorage = function () {
         pledges = data;
     }
     return data;
+};
+
+const savePledgingInfo = function (value, reward) {
+    const pledgeSum = value;
+    const pledgedRewardId = reward;
+    const pldegeId = activePledge.id;
+    let localStorageData = getLocalStorage();
+
+    if (!localStorageData) {
+        const [pledgeSelected] = pledges.filter(
+            (pledge) => pledge.id === pldegeId
+        );
+        const [rewardSelected] = pledgeSelected.rewards.filter(
+            (rew) => rew.id == pledgedRewardId
+        );
+        rewardSelected.countLeft--;
+    }
 };
 
 // rendering elements
@@ -177,33 +195,20 @@ const renderReward = function (pledge) {
         pledgeInfoEl.insertAdjacentHTML("beforeend", html);
     });
 
-    const selectRewardButton = document.querySelectorAll(".reward");
-    selectRewardButton.forEach((rewardBtn) => {
-        rewardBtn.addEventListener("click", function (e) {
-            let parentNode = e.target.parentNode.parentNode;
-            let rewardName =
-                parentNode.querySelector(".header-medium").innerText;
-
-            pledgeMOdalHeaders.forEach((header) => {
-                if (header.innerText.trim("") == rewardName) {
-                    const activeCard = header.closest(".card-modal");
-                    selectPledge(activeCard);
-                } else {
-                    return;
-                }
-            });
-            openModal(modalPledge);
-        });
-    });
+    selectRewarListener();
 };
 
 const renderRewardsModal = function (pledge) {
     const rewards = pledge.rewards;
+    let i = 1;
     if (!rewards) return;
-
     rewards.forEach((reward) => {
         const html = `
-            <div class="card card-modal">
+            <div class="${
+                reward.countLeft > 0
+                    ? "card card-modal"
+                    : "card card-modal inactive"
+            }" id="${i++}">
             <div>
                 <input type="radio" name="radio" class="card-radio" />
             </div>
@@ -211,7 +216,9 @@ const renderRewardsModal = function (pledge) {
                 <div class="couples">
                     <div class="couples-left">
                         <h3 class="header-medium">${reward.name}</h3>
-                        <span class="bidding">Pledge $${reward.minSum} or more</span>
+                        <span class="bidding">Pledge $${
+                            reward.minSum
+                        } or more</span>
                     </div>
                     <div class="couples-left">
                         <span class="header-medium">${reward.countLeft}</span
@@ -230,34 +237,10 @@ const renderRewardsModal = function (pledge) {
         modalPledge.insertAdjacentHTML("beforeend", html);
     });
 
-    const radioButtonEl = document.querySelectorAll(".card-radio");
-    const rewardSubmitBtn = document.querySelectorAll(".submit-pledge");
-
-    radioButtonEl.forEach((radio) => {
-        radio.addEventListener("click", function (e) {
-            const parentNode = e.target.parentNode.parentNode;
-            selectPledge(parentNode);
-        });
-    });
-
-    rewardSubmitBtn.forEach((submitBtn) => {
-        submitBtn.addEventListener("click", function (e) {
-            const inputValue = e.target.previousElementSibling.value;
-            if (inputValue > 0 && inputValue) {
-                closeModal(modalPledge);
-                openModal(successModal);
-            } else return;
-        });
-    });
-
-    const closeBtn = document.querySelector(".close");
-    closeBtn.addEventListener("click", function () {
-        closeModal(successModal);
-    });
+    rewardModalListener(rewards);
 };
 
 // UI stuff
-
 const openModal = function (modal) {
     openedModal = modal;
     modal.classList.remove("hidden");
@@ -342,3 +325,53 @@ backProjectBtn.addEventListener("click", function () {
 closeBtn.addEventListener("click", function () {
     closeModal(modalPledge);
 });
+
+const selectRewarListener = function () {
+    const selectRewardButton = document.querySelectorAll(".reward");
+    selectRewardButton.forEach((rewardBtn) => {
+        rewardBtn.addEventListener("click", function (e) {
+            let parentNode = e.target.parentNode.parentNode;
+            let rewardName =
+                parentNode.querySelector(".header-medium").innerText;
+
+            pledgeMOdalHeaders.forEach((header) => {
+                if (header.innerText.trim("") == rewardName) {
+                    const activeCard = header.closest(".card-modal");
+                    selectPledge(activeCard);
+                } else {
+                    return;
+                }
+            });
+            openModal(modalPledge);
+        });
+    });
+};
+// modal listeners
+const rewardModalListener = function (rewards) {
+    const radioButtonEl = document.querySelectorAll(".card-radio");
+    const rewardSubmitBtn = document.querySelectorAll(".submit-pledge");
+
+    radioButtonEl.forEach((radio) => {
+        radio.addEventListener("click", function (e) {
+            const parentNode = e.target.parentNode.parentNode;
+            chosenReward = parentNode.id;
+            selectPledge(parentNode);
+        });
+    });
+
+    rewardSubmitBtn.forEach((submitBtn) => {
+        submitBtn.addEventListener("click", function (e) {
+            const inputValue = e.target.previousElementSibling.value;
+            if (inputValue > 0 && inputValue) {
+                closeModal(modalPledge);
+                openModal(successModal);
+                savePledgingInfo(inputValue, chosenReward);
+            } else return;
+        });
+    });
+
+    const closeBtn = document.querySelector(".close");
+    closeBtn.addEventListener("click", function () {
+        closeModal(successModal);
+    });
+};
