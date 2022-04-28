@@ -11,14 +11,14 @@ let pledges = [
                 id: 1,
                 name: "Black Edition Stand",
                 countTotal: 200,
-                countLeft: 55,
+                countLeft: 50,
                 minSum: 30,
             },
             {
                 id: 2,
                 name: "Bamboo Stand",
                 countTotal: 300,
-                countLeft: 99,
+                countLeft: 100,
                 minSum: 90,
             },
             {
@@ -30,8 +30,8 @@ let pledges = [
             },
         ],
         sumGoal: 100000,
-        sumBacked: 89914,
-        numBackers: 5007,
+        sumBacked: 8000,
+        numBackers: 5000,
         startDate: "2020.01.13",
         daysTotal: 100,
         daysLeft: 70,
@@ -258,9 +258,28 @@ const removeBookmark = function () {
 
 // saving pledging info
 const savePledgingInfo = function (value, reward) {
-    const pledgeSum = value;
-    const pledgedRewardId = reward;
+    const pledgeSum = +value;
+    const pledgedReward = reward;
     let localStorageData = getLocalStorage("pledge");
+
+    if (!localStorageData) {
+        activePledge.numBackers++;
+        activePledge.sumBacked = +activePledge.sumBacked + pledgeSum;
+        activePledge.rewards.forEach((reward) => {
+            if (reward.id == pledgedReward.id) {
+                reward.countLeft--;
+            } else return;
+        });
+    } else {
+        // if tehres data change everythin
+    }
+
+    // save data to local storage
+    setLocalStorage("pledge", activePledge);
+
+    // update HTML
+    innerTextSetter(activePledge);
+    // update plege LEFT html elements
 };
 
 // EVENT HANDLERS
@@ -320,19 +339,25 @@ backProjectBtn.addEventListener("click", function () {
 // rewards modal listener
 const rewardModalListener = function (rewards) {
     const radioButtonEl = document.querySelectorAll(".card-radio");
-    const rewardSubmitBtn = document.querySelectorAll(".submit-pledge");
+
     radioButtonEl.forEach((radio) => {
         radio.addEventListener("click", function (e) {
             const parentNode = e.target.parentNode.parentNode;
             selectPledge(parentNode);
 
+            const rewardBtnSubmit = parentNode.querySelector(".submit-pledge");
+
             const chosenRewardId = parentNode.id;
-            const rewardBtnSubmit = parentNode.querySelector("button");
+            const chosenReward = rewards.find(
+                (reward) => reward.id == chosenRewardId
+            );
 
             rewardBtnSubmit.addEventListener("click", function (e) {
                 const inputValue = e.target.previousElementSibling.value;
-                if (inputValue > 0 && inputValue) {
-                    savePledgingInfo(inputValue, chosenRewardId);
+                const rewardsLeft = chosenReward.countLeft;
+                const minSum = chosenReward.minSum;
+                if (inputValue >= minSum && rewardsLeft > 0 && inputValue) {
+                    savePledgingInfo(inputValue, chosenReward);
                     closeModal(modalPledge);
                     openModal(successModal);
                 } else return;
