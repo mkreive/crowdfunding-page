@@ -317,7 +317,7 @@ const savePledgingInfo = function (value, reward) {
 
     // update HTML+
     innerTextSetter(activePledge);
-    removeRenders();
+    removeRenders(".card-pledge");
     renderReward(activePledge);
 };
 
@@ -329,14 +329,19 @@ window.addEventListener("load", function () {
     const bookmarksDataStorage = getLocalStorage("bookmarks");
 
     // setting active pledge
-    if (pledgeDataStorage) {
-        activePledge = pledgeDataStorage;
-    } else if (bookmarksDataStorage) {
-        bookmarked = bookmarksDataStorage;
-        activePledge = pledges.find((pledge) => pledge.id == bookmarked);
-        bookmarkIt();
+    if (pledgeDataStorage || bookmarksDataStorage) {
+        if (bookmarksDataStorage) {
+            bookmarked = bookmarksDataStorage;
+            activePledge = pledges.find((pledge) => pledge.id == bookmarked);
+            console.log(bookmarked);
+            bookmarkIt();
+        } else {
+            activePledge = pledgeDataStorage;
+        }
     } else if (!pledgeDataStorage && !bookmarksDataStorage) {
         activePledge = pledges[0];
+    } else {
+        this.alert("Error loading page... sorry");
     }
 
     // rendering page
@@ -400,7 +405,6 @@ const rewardModalListener = function (rewards) {
                     savePledgingInfo(inputValue, chosenReward);
                     closeModal(modalPledge);
                     removeRenders(".card-modal");
-                    removeRenders(".card-pledge");
                     openModal(successModal);
                 } else {
                     console.log("error submitting data");
