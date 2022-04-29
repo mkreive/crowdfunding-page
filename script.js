@@ -216,6 +216,13 @@ const renderRewardsModal = function (pledge) {
     rewardModalListener(rewards);
 };
 
+const removeRenders = function () {
+    const elements = document.querySelectorAll(".card-pledge");
+    elements.forEach((element) => {
+        pledgeInfoEl.removeChild(element);
+    });
+};
+
 // UI stuff
 const openModal = function (modal) {
     openedModal = modal;
@@ -279,7 +286,8 @@ const savePledgingInfo = function (value, reward) {
 
     // update HTML
     innerTextSetter(activePledge);
-    // update plege LEFT html elements
+    removeRenders();
+    renderReward(activePledge);
 };
 
 // EVENT HANDLERS
@@ -292,6 +300,7 @@ window.addEventListener("load", function () {
     // setting active pledge
     if (pledgeDataStorage) {
         [activePledge] = pledgeDataStorage;
+        console.log(activePledge);
     } else if (bookmarksDataStorage) {
         bookmarked = bookmarksDataStorage;
         activePledge = pledges.find((pledge) => pledge.id == bookmarked);
