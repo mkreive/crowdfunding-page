@@ -141,6 +141,7 @@ const innerTextSetter = function (pledge) {
     progressBar.value = +pledge.sumBacked;
     progressBar.max = +pledge.sumGoal;
 };
+// rendering front page rewards
 const renderReward = function (pledge) {
     const rewards = pledge.rewards;
     if (!rewards) return;
@@ -177,6 +178,7 @@ const renderReward = function (pledge) {
     });
     activateRewardListeners();
 };
+// rendering modal rewards
 const renderRewardsModal = function (pledge) {
     const rewards = pledge.rewards;
     let i = 1;
@@ -215,7 +217,7 @@ const renderRewardsModal = function (pledge) {
     });
     rewardModalListener(rewards);
 };
-
+// rendering modal rewards addons
 const renderRewardAddon = function (reward) {
     const rewardCard = reward;
 
@@ -238,7 +240,6 @@ const renderRewardAddon = function (reward) {
 
     rewardCard.insertAdjacentHTML("beforeend", html);
 };
-
 const removeRenders = function (elementClass) {
     const elements = document.querySelectorAll(elementClass);
     elements.forEach((element) => {
