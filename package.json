@@ -4,7 +4,9 @@
     "description": "crowdfunding page frontendmentor challnage",
     "main": "script.js",
     "scripts": {
-        "compile:sass": "node-sass sass/main.scss css/style.css -w"
+        "compile:sass": "node-sass sass/main.scss css/style.css -w",
+        "start": "parcel index.html",
+        "build": "parcel build index.html"
     },
     "repository": {
         "type": "git",
@@ -17,6 +19,7 @@
     },
     "homepage": "https://github.com/mkreive/Crowdfunding-page#readme",
     "devDependencies": {
-        "node-sass": "^7.0.1"
+        "node-sass": "^7.0.1",
+        "parcel": "^2.5.0"
     }
 }
