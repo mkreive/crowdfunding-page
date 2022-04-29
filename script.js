@@ -239,14 +239,9 @@ const renderRewardAddon = function (reward) {
     rewardCard.insertAdjacentHTML("beforeend", html);
 };
 
-const removeRenders = function () {
-    const elements = document.querySelectorAll(".card-pledge");
+const removeRenders = function (elementClass) {
+    const elements = document.querySelectorAll(elementClass);
     elements.forEach((element) => {
-        element.remove();
-    });
-
-    const elementsModal = document.querySelectorAll(".card-modal");
-    elementsModal.forEach((element) => {
         element.remove();
     });
 };
@@ -264,26 +259,19 @@ const closeModal = function (modal) {
 };
 
 const selectPledge = function (pledge) {
-    if (!pledgeActive) {
-        pledgeActive = pledge;
-        pledge.classList.add("active");
-
-        // pledgeAddonElement.classList.remove("hidden");
-        // pledge.appendChild(pledgeAddonElement);
-    } else if (pledgeActive) {
-        pledegeInputValue.value = "";
-        pledegeInputValue[0].value = "";
+    if (pledgeActive) {
         activePledgeRemoving(pledgeActive);
-        pledgeActive = pledge;
-        pledge.classList.add("active");
-        // pledgeAddonElement.classList.remove("hidden");
-        // pledge.appendChild(pledgeAddonElement);
     }
+
+    pledgeActive = pledge;
+    pledge.classList.add("active");
     renderRewardAddon(pledgeActive);
 };
 const activePledgeRemoving = function (pledge) {
     let oldActivePledge = pledge;
+    const childaddon = oldActivePledge.querySelector(".card-addon");
     oldActivePledge.classList.remove("active");
+    childaddon.remove();
 };
 const bookmarkIt = function () {
     bookmarkBtn.classList.add("bookmarked");
@@ -396,8 +384,6 @@ const rewardModalListener = function (rewards) {
             const parentNode = e.target.parentNode.parentNode;
             selectPledge(parentNode);
 
-            // renderRewardAddon();
-
             const rewardBtnSubmit = parentNode.querySelector(".submit-pledge");
 
             const chosenRewardId = parentNode.id;
@@ -406,8 +392,6 @@ const rewardModalListener = function (rewards) {
             );
 
             rewardBtnSubmit.addEventListener("click", function (e) {
-                console.log(e.target);
-
                 let inputValue = e.target.previousElementSibling.value;
                 const rewardsLeft = chosenReward.countLeft;
                 const minSum = chosenReward.minSum;
@@ -415,6 +399,8 @@ const rewardModalListener = function (rewards) {
                 if (inputValue >= minSum && rewardsLeft > 0 && inputValue) {
                     savePledgingInfo(inputValue, chosenReward);
                     closeModal(modalPledge);
+                    removeRenders(".card-modal");
+                    removeRenders(".card-pledge");
                     openModal(successModal);
                 } else {
                     console.log("error submitting data");
