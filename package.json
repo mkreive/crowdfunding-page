@@ -6,7 +6,7 @@
     "scripts": {
         "compile:sass": "node-sass sass/main.scss css/style.css -w",
         "start": "parcel index.html",
-        "build": "parcel build index.html"
+        "build": "parcel build script.js"
     },
     "repository": {
         "type": "git",
