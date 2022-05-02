@@ -333,12 +333,9 @@ window.addEventListener("load", function () {
     if (pledgeDataStorage || bookmarksDataStorage) {
         if (bookmarksDataStorage) {
             bookmarked = bookmarksDataStorage;
-            activePledge = pledges.find((pledge) => pledge.id == bookmarked);
-            console.log(bookmarked);
             bookmarkIt();
-        } else {
-            activePledge = pledgeDataStorage;
         }
+        activePledge = pledgeDataStorage;
     } else if (!pledgeDataStorage && !bookmarksDataStorage) {
         activePledge = pledges[0];
     } else {
