@@ -324,7 +324,7 @@ const savePledgingInfo = function (value, reward) {
 
 // EVENT HANDLERS
 // page load
-window.addEventListener("load", function () {
+     {
     // getting local storage data
     const pledgeDataStorage = getLocalStorage("pledge");
     const bookmarksDataStorage = getLocalStorage("bookmarks");
